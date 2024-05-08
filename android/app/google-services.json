@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "647544119714",
+    "project_id": "sellgo2-beea7",
+    "storage_bucket": "sellgo2-beea7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647544119714:android:541956768bb8fb958092fb",
+        "android_client_info": {
+          "package_name": "com.example.sellgo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "647544119714-rqs34bvta67k5hiukj7iboceivn5o9o0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWQn4u4A0Q-z6T8LH9cDqlNiMNpuuo3Jk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "647544119714-rqs34bvta67k5hiukj7iboceivn5o9o0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
