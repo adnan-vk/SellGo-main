@@ -8,7 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ItemProvider extends ChangeNotifier {
+class ItemProvider extends ChangeNotifier { 
   List listItems = [
     "Computer",
     "MobilePhones",

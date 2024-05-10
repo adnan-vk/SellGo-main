@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 
 class AuthenticationProvider extends ChangeNotifier {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  List<UserModel> allUsers = [];
   UserModel? currentUser;
+  UserModel? sortedUser;
   final AuthService authService = AuthService();
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -64,7 +64,8 @@ class AuthenticationProvider extends ChangeNotifier {
   }
 
   getUser() async {
-    allUsers = await authService.getAllUsers();
+    currentUser = await authService.getCurrentUser();
+    log(currentUser!.phoneNumber!);
     notifyListeners();
   }
 
@@ -129,16 +130,16 @@ class AuthenticationProvider extends ChangeNotifier {
     selectCountry = value;
   }
 
-  updateProduct(userid, UserModel data) async {
+  updateUser(userid, UserModel data) async {
     await authService.updateUser(userid, data);
     clearControllers();
     notifyListeners();
   }
 
-  getCurrentUser() async {
-    await getUser();
-    currentUser = allUsers
-        .firstWhere((element) => element.uId == firebaseAuth.currentUser!.uid);
+  getProductUser(String uId) async {
+    // sortedUser;
+    List<UserModel> allUsers = await authService.getAllUser();
+    sortedUser = allUsers.firstWhere((element) => element.uId == uId);
     notifyListeners();
   }
 }

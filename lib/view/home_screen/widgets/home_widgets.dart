@@ -1,3 +1,4 @@
+import 'package:authentication/controller/authentication/auth_controller.dart';
 import 'package:authentication/controller/item_provider/item_provider.dart';
 import 'package:authentication/theme/colors.dart';
 import 'package:authentication/view/category_page/category.dart';
@@ -119,6 +120,7 @@ class HomeWidgets {
 
   productList(context) {
     final pro = Provider.of<ItemProvider>(context, listen: false);
+    final authpro = Provider.of<AuthenticationProvider>(context, listen: false);
     pro.getProduct();
     final size = MediaQuery.of(context).size;
     int crossAxisCount = (size.width / 200).floor();
@@ -142,13 +144,23 @@ class HomeWidgets {
                 ? value.searchlist[index]
                 : value.allproducts[index];
             return GestureDetector(
-              onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Details(
-                      product: product,
-                    ),
-                  )),
+              onTap: () async {
+                bool? thisuser;
+                if (product.uid == firebseauth!.uid) {
+                  thisuser = true;
+                } else {
+                  thisuser = false;
+                }
+                await authpro.getProductUser(product.uid!);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Details(
+                        thisUser: thisuser,
+                        product: product,
+                      ),
+                    ));
+              },
               child: Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,25 +201,20 @@ class HomeWidgets {
                                     weight: FontWeight.bold,
                                   ),
                                 ),
-                                Consumer<ItemProvider>(
-                                  builder: (context, provalue, child) =>
-                                      GestureDetector(
-                                    onTap: () {
-                                      final wish =
-                                          provalue.favListCheck(product);
-                                      provalue.favouritesClicked(
-                                          product.id!, wish);
-                                    },
-                                    child: provalue.favListCheck(product)
-                                        ? Icon(
-                                            EneftyIcons.heart_outline,
-                                            color: Colors.red,
-                                          )
-                                        : Icon(
-                                            EneftyIcons.heart_bold,
-                                            color: Colors.red,
-                                          ),
-                                  ),
+                                GestureDetector(
+                                  onTap: () {
+                                    final wish = value.favListCheck(product);
+                                    value.favouritesClicked(product.id!, wish);
+                                  },
+                                  child: value.favListCheck(product)
+                                      ? Icon(
+                                          EneftyIcons.heart_outline,
+                                          color: Colors.red,
+                                        )
+                                      : Icon(
+                                          EneftyIcons.heart_bold,
+                                          color: Colors.red,
+                                        ),
                                 ),
                               ],
                             ),

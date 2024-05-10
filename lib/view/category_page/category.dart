@@ -3,6 +3,7 @@ import 'package:authentication/view/details/details.dart';
 import 'package:authentication/widgets/navigator_widget.dart';
 import 'package:authentication/widgets/text_widget.dart';
 import 'package:enefty_icons/enefty_icons.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -44,13 +45,23 @@ class Category extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final product = filteredProducts[index];
                       return GestureDetector(
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Details(
-                                product: product,
-                              ),
-                            )),
+                        onTap: () {
+                          bool? thisuser;
+                          if (product.id ==
+                              FirebaseAuth.instance.currentUser!.uid) {
+                            thisuser = true;
+                          } else {
+                            thisuser = false;
+                          }
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Details(
+                                  thisUser: thisuser!,
+                                  product: product,
+                                ),
+                              ));
+                        },
                         child: Container(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

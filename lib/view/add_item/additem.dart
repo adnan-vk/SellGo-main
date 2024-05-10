@@ -146,6 +146,7 @@ class AddItem extends StatelessWidget {
         wishlist: [],
         image: getProvider.downloadUrls,
         place: getProvider.placecontroller.text,
+        uid: FirebaseAuth.instance.currentUser!.uid,
       );
       getProvider.addProduct(product);
       getProvider.clearControllers();

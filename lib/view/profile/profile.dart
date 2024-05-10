@@ -3,9 +3,9 @@ import 'package:authentication/theme/colors.dart';
 import 'package:authentication/view/favourites/favourites.dart';
 import 'package:authentication/view/profile/my_products/my_products.dart';
 import 'package:authentication/view/profile/help_and_support/help_support.dart';
+import 'package:authentication/view/profile/useredit/useredit.dart';
 import 'package:authentication/view/profile/widgets/profile_widget.dart';
 import 'package:authentication/widgets/text_widget.dart';
-import 'package:authentication/widgets/textfield_widget.dart';
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class Profile extends StatelessWidget {
     final firebaseauth = FirebaseAuth.instance.currentUser;
     final size = MediaQuery.of(context).size;
     final pro = Provider.of<AuthenticationProvider>(context, listen: false);
-    pro.getCurrentUser();
+    // pro.getCurrentUser();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -75,21 +75,20 @@ class Profile extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        TextWidget().text(
-                            data: FirebaseAuth
-                                        .instance.currentUser?.displayName ==
-                                    null
-                                ? "${pro.currentUser?.firstname!.toUpperCase()} ${pro.currentUser?.lastname!.toUpperCase()}"
-                                : FirebaseAuth.instance.currentUser!.displayName
-                                    .toString()
-                                    .toUpperCase(),
-                            size: size.width * .06,
-                            weight: FontWeight.bold),
+                        SizedBox(
+                          width: size.width * .64,
+                          child: TextWidget().text(
+                              data:
+                                  "${pro.currentUser?.firstname!.toUpperCase()} ${pro.currentUser?.lastname!.toUpperCase()}",
+                              size: size.width * .06,
+                              weight: FontWeight.bold),
+                        ),
                         TextButton(
                           onPressed: () {
                             showDialog(
                               context: context,
-                              builder: (context) => UserEdit(),
+                              builder: (context) =>
+                                  UserEdit(user: pro.currentUser!),
                             );
                           },
                           child: TextWidget().text(
@@ -101,14 +100,12 @@ class Profile extends StatelessWidget {
                     ),
                     SizedBox(height: size.height * .015),
                     TextWidget().text(
-                      data:
-                          "Email : ${FirebaseAuth.instance.currentUser?.email ?? ""}",
+                      data: "Email : ${pro.currentUser?.email.toString()}",
                       size: size.width * .04,
                     ),
                     SizedBox(height: size.height * .015),
                     TextWidget().text(
-                      data:
-                          "Phone : ${FirebaseAuth.instance.currentUser!.phoneNumber ?? ""}",
+                      data: "Phone : ${pro.currentUser?.phoneNumber ?? " "}",
                       size: size.width * .042,
                     ),
                   ],
@@ -139,61 +136,6 @@ class Profile extends StatelessWidget {
                 height: size.height * .03,
               ),
               TextWidget().text(data: "v 1.0.1", size: size.width * .03)
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class UserEdit extends StatefulWidget {
-  UserEdit({super.key});
-
-  @override
-  State<UserEdit> createState() => _UserEditState();
-}
-
-TextEditingController firstNameController = TextEditingController();
-TextEditingController lastNameController = TextEditingController();
-TextEditingController emailController = TextEditingController();
-TextEditingController phoneController = TextEditingController();
-
-class _UserEditState extends State<UserEdit> {
-  // @override
-  // void initState() {
-  //   firstNameController = TextEditingController(text: widget.user.firstname);
-  //   lastNameController = TextEditingController(text: widget.user.lastname);
-  //   emailController = TextEditingController(text: widget.user.email);
-  //   lastNameController = TextEditingController(text: widget.user.phoneNumber);
-  //   super.initState();
-  // }
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Container(
-        padding: EdgeInsets.all(20),
-        child: Center(
-          child: Column(
-            children: [
-              TextWidget().text(
-                  data: "Edit User Details",
-                  size: 20.0,
-                  weight: FontWeight.bold),
-              SizedBox(height: size.height * .03),
-              textFormField().textformfield(
-                  controller: firstNameController, hinttext: "First Name"),
-              SizedBox(height: size.height * .03),
-              textFormField().textformfield(
-                  controller: lastNameController, hinttext: "Last Name"),
-              SizedBox(height: size.height * .03),
-              textFormField().textformfield(
-                  controller: emailController, hinttext: "Email"),
-              SizedBox(height: size.height * .03),
-              textFormField().textformfield(
-                  controller: phoneController, hinttext: "Phone Number")
             ],
           ),
         ),

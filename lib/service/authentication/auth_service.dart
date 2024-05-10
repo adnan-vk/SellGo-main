@@ -25,7 +25,6 @@ class AuthService {
         .withConverter<UserModel>(
       fromFirestore: (snapshot, options) {
         return UserModel.fromJson(
-          snapshot.id,
           snapshot.data()!,
         );
       },
@@ -37,16 +36,23 @@ class AuthService {
 
   Future<void> addUser(UserModel data) async {
     try {
-      await user.add(data);
+      await user.doc(firebaseAuth.currentUser!.uid).set(data);
     } catch (e) {
       log('Error adding post :$e');
     }
   }
 
-  Future<List<UserModel>> getAllUsers() async {
-    final snapshot = await user.get();
-    return snapshot.docs.map((doc) => doc.data()).toList();
+  getCurrentUser() async {
+    final snapshot = await firestore
+        .collection(collection)
+        .doc(firebaseAuth.currentUser!.uid)
+        .get();
+    return UserModel.fromJson(snapshot.data()!);
   }
+  // Future<List<UserModel>> getAllUsers() async {
+  //   final snapshot = await user.get();
+  //   return snapshot.docs.map((doc) => doc.data()).toList();
+  // }
 
   Future<UserCredential> signUpEmail(String email, String password) async {
     try {
@@ -164,6 +170,21 @@ class AuthService {
       await user.doc(userid).update(data.toJson());
     } catch (e) {
       log("error in updating product : $e");
+    }
+  }
+
+  Future<List<UserModel>> getAllUser() async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot =
+          await firestore.collection(collection).get();
+
+      List<UserModel> data =
+          snapshot.docs.map((e) => UserModel.fromJson(e.data())).toList();
+
+      return data;
+    } catch (e) {
+      log('get error: $e');
+      throw e;
     }
   }
 }

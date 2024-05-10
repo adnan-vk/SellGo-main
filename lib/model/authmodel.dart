@@ -14,7 +14,7 @@ class UserModel {
       this.uId,
       this.image});
 
-  factory UserModel.fromJson(String id, Map<String, dynamic> json) {
+  factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
         email: json['email'],
         firstname: json['firstname'],

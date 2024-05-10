@@ -8,16 +8,19 @@ class ProductModel {
   List? image;
   String? place;
   List wishlist;
-  ProductModel(
-      {this.id,
-      this.userName,
-      required this.productname,
-      required this.description,
-      required this.price,
-      this.image,
-      required this.place,
-      required this.category,
-      required this.wishlist});
+  String? uid;
+  ProductModel({
+    this.id,
+    this.userName,
+    required this.productname,
+    required this.description,
+    required this.price,
+    this.image,
+    required this.place,
+    required this.category,
+    required this.wishlist,
+    required this.uid,
+  });
 
   factory ProductModel.fromjson(String id, Map<String, dynamic> json) {
     return ProductModel(
@@ -30,6 +33,7 @@ class ProductModel {
       image: List<String>.from(json['image']),
       wishlist: List<String>.from(json['wishlist']),
       place: json['place'],
+      uid: json["uid"],
     );
   }
 
@@ -42,7 +46,8 @@ class ProductModel {
       'price': price,
       'image': image,
       'wishlist': wishlist,
-      'place': place
+      'place': place,
+      "uid": uid,
     };
   }
 }

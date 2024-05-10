@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:authentication/model/message_model.dart';
+import 'package:authentication/utils/utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -11,22 +12,12 @@ class ChatService {
 
   String chatCollection = 'Chats';
   Reference storage = FirebaseStorage.instance.ref();
-  String generateChatRoomId({
-    required String uId1,
-    required String uId2,
-  }) {
-    List<String> uIds = [uId1, uId2];
-    uIds.sort();
-    String chatId = uIds.join();
-    return chatId;
-  }
 
   sendMessage(MessageModel data) async {
     String chatRoomId = generateChatRoomId(
         uId1: firebaseAuth.currentUser!.uid, uId2: data.recieverId!);
     String senderId =
         data.senderId! + DateTime.now().millisecondsSinceEpoch.toString();
-    log(chatRoomId);
     try {
       await firestore
           .collection(chatCollection)
@@ -34,49 +25,43 @@ class ChatService {
           .collection("Messeges")
           .doc(senderId)
           .set(data.toJson());
+      log(firebaseAuth.currentUser!.uid);
+      log(data.recieverId!);
+      log(chatRoomId);
     } catch (e) {
       throw e;
     }
     ;
   }
 
-  Future<List<MessageModel>> getMessages(String receiverId) async {
+  createChat(MessageModel data) async {
     try {
-      List<MessageModel> messages = [];
+      await firestore
+          .collection(chatCollection)
+          .doc(data.chatRoomId)
+          .set(data.toJson());
+      log('chat created');
+    } catch (e) {
+      throw e;
+    }
+    ;
+  }
+
+  Future<Stream<QuerySnapshot<Map<String, dynamic>>>> getMessages(
+      String receiverId) async {
+    try {
       String chatRoomId = generateChatRoomId(
           uId1: firebaseAuth.currentUser!.uid, uId2: receiverId);
+      log("getMessages : ${chatRoomId}");
       var snapshot = await firestore
-          .collection(chatCollection)
+          .collection("Chats")
           .doc(chatRoomId)
           .collection('Messeges')
-          .orderBy('timeStamp', descending: false)
-          .get();
-
-      messages = snapshot.docs
-          .map((doc) => MessageModel.fromJson(doc.data()))
-          .toList();
-
-      return messages;
+          .orderBy('timestamp', descending: true)
+          .snapshots();
+      return snapshot;
     } catch (e) {
       throw e;
     }
   }
-
-  // Future<List<MessageModel>> getAllChat(String receiverId) async {
-  //   try {
-  //     List<MessageModel> messages = [];
-  //     String chatRoomId = generateChatRoomId(
-  //         uId1: firebaseAuth.currentUser!.uid, uId2: receiverId);
-  //     var snapshot = await firestore
-  //         .collection(chatCollection)
-  //         .doc(chatRoomId)
-  //         .collection('Messeges')
-  //         .orderBy('timeStamp', descending: true)
-  //         .get();
-
-  //     return messages;
-  //   } catch (e) {
-  //     throw e;
-  //   }
-  // }
 }
