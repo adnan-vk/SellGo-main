@@ -12,9 +12,7 @@ import 'package:authentication/widgets/circleavatar_widget.dart';
 import 'package:authentication/widgets/navigator_widget.dart';
 import 'package:authentication/widgets/text_widget.dart';
 import 'package:enefty_icons/enefty_icons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class Details extends StatefulWidget {
@@ -202,8 +200,8 @@ class _DetailsState extends State<Details> {
                                   : IconButton(
                                       onPressed: () => NavigatorHelper().push(
                                         context: context,
-                                        page: ChatPage(
-                                            userinfo: pro.currentUser!),
+                                        page:
+                                            ChatPage(userinfo: pro.sortedUser!),
                                       ),
                                       icon: Icon(EneftyIcons.message_outline),
                                     ),

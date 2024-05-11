@@ -2,7 +2,7 @@ import 'package:authentication/model/authmodel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MessageModel {
-  String? message;
+  String? message; 
   String? senderId;
   String? recieverId;
   DateTime? timestamp;

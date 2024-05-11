@@ -20,6 +20,7 @@ class ChatProvider extends ChangeNotifier {
   List<MessageModel> myAllChat = [];
 
   sendMessage(String receiverId) async {
+    await createChat(receiverId);
     final data = MessageModel(
         senderId: firebaseAuth.currentUser!.uid,
         recieverId: receiverId,
@@ -54,6 +55,7 @@ class ChatProvider extends ChangeNotifier {
       recieverId: receiverId,
       senderId: firebaseAuth.currentUser!.uid,
       timestamp: DateTime.now(),
+      
     );
     return await chatService.createChat(data);
   }
@@ -71,6 +73,7 @@ class ChatProvider extends ChangeNotifier {
     try {
       allChats = await chatService.getAllChats();
       for (var chat in allChats) {
+      log("get all try ${allChats.length}");
         if (chat.senderId == firebaseAuth.currentUser!.uid ||
             chat.recieverId == firebaseAuth.currentUser!.uid) {
           UserModel? user = allUser.firstWhere(
@@ -79,10 +82,11 @@ class ChatProvider extends ChangeNotifier {
                   user.uId == chat.senderId &&
                       user.uId != firebaseAuth.currentUser!.uid,
               orElse: () => UserModel());
-          List<MessageModel> message = await getMessages(user.uId!);
+              log(user.email!);
+          // List<MessageModel> message = await getMessages(user.uId!);
 
           final chatInfo = MessageModel(
-              message: message[0].message ?? 'No Messages', userInfo: user);
+              message: /* message[0].message ??  */'No Messages', userInfo: user);
           myAllChat.add(chatInfo);
           log("chat info is : ${chatInfo}");
           log("all chat length is : ${myAllChat.length}");

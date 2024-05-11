@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:authentication/controller/authentication/auth_controller.dart';
 import 'package:authentication/controller/chat_provider/chat_provider.dart';
 import 'package:authentication/model/authmodel.dart';
 import 'package:authentication/service/chat_service/chat_service.dart';
@@ -36,12 +35,11 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final pro = Provider.of<ChatProvider>(context, listen: false);
-    final authpro = Provider.of<AuthenticationProvider>(context, listen: false);
     pro.getMessages(widget.userinfo.uId!);
     return Scaffold(
       appBar: AppBar(
         title: TextWidget()
-            .text(data: authpro.sortedUser!.firstname, size: size.width * .05),
+            .text(data: widget.userinfo.firstname, size: size.width * .05),
         automaticallyImplyLeading: false,
         leading: IconButton(
             onPressed: () {

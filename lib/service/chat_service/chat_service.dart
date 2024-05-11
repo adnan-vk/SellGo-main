@@ -25,22 +25,7 @@ class ChatService {
           .collection("Messeges")
           .doc(senderId)
           .set(data.toJson());
-      log("firebaseAuth.currentUser!.uid : ${firebaseAuth.currentUser!.uid}");
-      log("data.recieverId! : ${data.recieverId!}");
-      log("chatRoomId : ${chatRoomId}");
-    } catch (e) {
-      throw e;
-    }
-    ;
-  }
-
-  createChat(MessageModel data) async {
-    try {
-      await firestore
-          .collection(chatCollection)
-          .doc(data.chatRoomId)
-          .set(data.toJson());
-      log('chat created');
+     
     } catch (e) {
       throw e;
     }
@@ -52,7 +37,7 @@ class ChatService {
     try {
       String chatRoomId = generateChatRoomId(
           uId1: firebaseAuth.currentUser!.uid, uId2: receiverId);
-      log("getMessages : ${chatRoomId}");
+
       var snapshot = await firestore
           .collection("Chats")
           .doc(chatRoomId)
@@ -77,6 +62,19 @@ class ChatService {
           .toList();
 
       return allChats;
+    } catch (e) {
+      log("getAllChats service chach : ${e}");
+      rethrow;
+    }
+  }
+
+  createChat(MessageModel data) async {
+    try {
+      await firestore
+          .collection(chatCollection)
+          .doc(data.chatRoomId)
+          .set(data.toJson());
+      log('chat created');
     } catch (e) {
       throw e;
     }
