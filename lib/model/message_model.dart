@@ -1,3 +1,4 @@
+import 'package:authentication/model/authmodel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MessageModel {
@@ -5,6 +6,7 @@ class MessageModel {
   String? senderId;
   String? recieverId;
   DateTime? timestamp;
+  UserModel? userInfo;
   String? chatRoomId;
 
   MessageModel({
@@ -12,10 +14,11 @@ class MessageModel {
     this.recieverId,
     this.senderId,
     this.timestamp,
+    this.userInfo,
     this.chatRoomId,
   });
 
-  factory MessageModel.fromJson(Map<String, dynamic> json) {
+  factory MessageModel.fromJson(json) {
     return MessageModel(
         message: json["content"],
         recieverId: json["recieverId"],

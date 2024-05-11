@@ -1,9 +1,9 @@
 import 'package:authentication/controller/bottom_provider/bottom_prov.dart';
 import 'package:authentication/theme/colors.dart';
-import 'package:authentication/view/add_item/additem.dart';
-import 'package:authentication/view/favourites/favourites.dart';
-import 'package:authentication/view/home_screen/home.dart';
-import 'package:authentication/view/profile/profile.dart';
+import 'package:authentication/view/bottom_bar/chatlist/chat_list.dart';
+import 'package:authentication/view/bottom_bar/favourites/favourites.dart';
+import 'package:authentication/view/bottom_bar/home_screen/home.dart';
+import 'package:authentication/view/bottom_bar/profile/profile.dart';
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +13,7 @@ class BottomBar extends StatelessWidget {
   final List tabs = [
     HomeScreen(),
     Favourites(),
-    AddItem(),
+    ChatList(),
     Profile(),
   ];
   @override
@@ -39,9 +39,9 @@ class BottomBar extends StatelessWidget {
             label: 'Favorite',
           ),
           BottomNavigationBarItem(
-            icon: Icon(EneftyIcons.add_square_outline),
-            activeIcon: Icon(EneftyIcons.add_square_bold),
-            label: 'Add Item',
+            icon: Icon(EneftyIcons.message_outline),
+            activeIcon: Icon(EneftyIcons.message_bold),
+            label: 'Profile',
           ),
           BottomNavigationBarItem(
             icon: Icon(EneftyIcons.profile_circle_outline),

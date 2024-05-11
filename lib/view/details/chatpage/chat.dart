@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../widgets/text_widget.dart';
+import '../../../widgets/text_widget.dart';
 import '../call/call.dart';
 
 class ChatPage extends StatefulWidget {

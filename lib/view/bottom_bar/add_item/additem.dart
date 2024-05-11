@@ -1,7 +1,7 @@
 import 'package:authentication/controller/item_provider/item_provider.dart';
 import 'package:authentication/model/itemmodel.dart';
 import 'package:authentication/theme/colors.dart';
-import 'package:authentication/view/add_item/widget/add_widget.dart';
+import 'package:authentication/view/bottom_bar/add_item/widget/add_widget.dart';
 import 'package:authentication/widgets/snack_bar_widgets.dart';
 import 'package:authentication/widgets/text_widget.dart';
 import 'package:enefty_icons/enefty_icons.dart';
@@ -31,6 +31,10 @@ class AddItem extends StatelessWidget {
               elevation: 0,
               title: TextWidget().text(data: "Add Item", color: colors().black),
               centerTitle: true,
+              leading: IconButton(
+                onPressed: () {},
+                icon: Icon(EneftyIcons.arrow_left_3_outline),
+              ),
             ),
             body: Padding(
               padding: const EdgeInsets.all(16.0),

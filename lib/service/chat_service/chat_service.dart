@@ -25,9 +25,9 @@ class ChatService {
           .collection("Messeges")
           .doc(senderId)
           .set(data.toJson());
-      log(firebaseAuth.currentUser!.uid);
-      log(data.recieverId!);
-      log(chatRoomId);
+      log("firebaseAuth.currentUser!.uid : ${firebaseAuth.currentUser!.uid}");
+      log("data.recieverId! : ${data.recieverId!}");
+      log("chatRoomId : ${chatRoomId}");
     } catch (e) {
       throw e;
     }
@@ -60,6 +60,23 @@ class ChatService {
           .orderBy('timestamp', descending: true)
           .snapshots();
       return snapshot;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<List<MessageModel>> getAllChats() async {
+    try {
+      final QuerySnapshot snapshot = await firestore
+          .collection(chatCollection)
+          .orderBy('timestamp', descending: false)
+          .get();
+
+      List<MessageModel> allChats = snapshot.docs
+          .map((DocumentSnapshot doc) => MessageModel.fromJson(doc.data()))
+          .toList();
+
+      return allChats;
     } catch (e) {
       throw e;
     }

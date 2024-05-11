@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:authentication/model/authmodel.dart';
 import 'package:authentication/model/message_model.dart';
+import 'package:authentication/service/authentication/auth_service.dart';
 import 'package:authentication/service/chat_service/chat_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,8 +14,10 @@ class ChatProvider extends ChangeNotifier {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   TextEditingController messageController = TextEditingController();
   ChatService chatService = ChatService();
+  AuthService userservice = AuthService();
   late ScrollController scrollController;
   List<MessageModel> allMessage = [];
+  List<MessageModel> myAllChat = [];
 
   sendMessage(String receiverId) async {
     final data = MessageModel(
@@ -23,8 +27,9 @@ class ChatProvider extends ChangeNotifier {
         timestamp: DateTime.now());
     await chatService.sendMessage(data);
     messageController.clear();
+    getAllChats();
     getMessages(receiverId);
-    notifyListeners();
+    // notifyListeners();
   }
 
   getMessages(String receiverId) async {
@@ -35,6 +40,7 @@ class ChatProvider extends ChangeNotifier {
       allMessage =
           message.docs.map((doc) => MessageModel.fromJson(doc.data())).toList();
       log("all messages are  : ${allMessage.length}");
+      scrollDown();
       notifyListeners();
     });
   }
@@ -57,4 +63,34 @@ class ChatProvider extends ChangeNotifier {
           scrollController.jumpTo(scrollController.position.maxScrollExtent);
         }
       });
+
+  getAllChats() async {
+    List<UserModel> allUser = await userservice.getAllUser();
+    List<MessageModel> allChats = [];
+    myAllChat.clear();
+    try {
+      allChats = await chatService.getAllChats();
+      for (var chat in allChats) {
+        if (chat.senderId == firebaseAuth.currentUser!.uid ||
+            chat.recieverId == firebaseAuth.currentUser!.uid) {
+          UserModel? user = allUser.firstWhere(
+              (user) =>
+                  user.uId == chat.recieverId ||
+                  user.uId == chat.senderId &&
+                      user.uId != firebaseAuth.currentUser!.uid,
+              orElse: () => UserModel());
+          List<MessageModel> message = await getMessages(user.uId!);
+
+          final chatInfo = MessageModel(
+              message: message[0].message ?? 'No Messages', userInfo: user);
+          myAllChat.add(chatInfo);
+          log("chat info is : ${chatInfo}");
+          log("all chat length is : ${myAllChat.length}");
+          notifyListeners();
+        }
+      }
+    } catch (e) {
+      log("Error from Get all chats : ${e.toString()}");
+    }
+  }
 }

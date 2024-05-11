@@ -1,7 +1,7 @@
 import 'package:authentication/controller/authentication/auth_controller.dart';
 import 'package:authentication/theme/colors.dart';
-import 'package:authentication/view/signin_screen/sign_in.dart';
-import 'package:authentication/view/signup/widgets/signup_widgets.dart';
+import 'package:authentication/view/authentication/signin_screen/sign_in.dart';
+import 'package:authentication/view/authentication/signup/widgets/signup_widgets.dart';
 import 'package:authentication/widgets/botton_widget.dart';
 import 'package:authentication/widgets/snack_bar_widgets.dart';
 import 'package:authentication/widgets/text_widget.dart';

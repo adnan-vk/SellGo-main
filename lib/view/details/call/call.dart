@@ -1,8 +1,9 @@
+import 'package:authentication/widgets/navigator_widget.dart';
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/circleavatar_widget.dart';
-import '../../widgets/text_widget.dart';
+import '../../../widgets/circleavatar_widget.dart';
+import '../../../widgets/text_widget.dart';
 
 class CallingPage extends StatelessWidget {
   const CallingPage({Key? key}) : super(key: key);
@@ -40,7 +41,9 @@ class CallingPage extends StatelessWidget {
                   height: size.height * .060,
                   width: size.width * .60,
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      NavigatorHelper().pop(context: context);
+                    },
                     icon: Icon(Icons.call_end),
                     color: Colors.white,
                     style: ButtonStyle(

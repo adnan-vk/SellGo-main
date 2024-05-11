@@ -1,6 +1,8 @@
 import 'package:authentication/controller/item_provider/item_provider.dart';
 import 'package:authentication/model/itemmodel.dart';
-import 'package:authentication/view/profile/my_products/widget/Product_widget.dart';
+import 'package:authentication/theme/colors.dart';
+import 'package:authentication/view/bottom_bar/add_item/additem.dart';
+import 'package:authentication/view/bottom_bar/profile/my_products/widget/Product_widget.dart';
 import 'package:authentication/widgets/navigator_widget.dart';
 import 'package:authentication/widgets/text_widget.dart';
 import 'package:enefty_icons/enefty_icons.dart';
@@ -35,7 +37,7 @@ class _MyProductsState extends State<MyProducts> {
         title: TextWidget().text(data: "MyProducts"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(15),
         child: Consumer<ItemProvider>(
           builder: (context, provider, child) {
             final List<ProductModel> myProducts = filteringMyProduct(provider);
@@ -51,6 +53,22 @@ class _MyProductsState extends State<MyProducts> {
                     child: Text('No products found.'),
                   );
           },
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Container(
+        padding: EdgeInsets.all(15),
+        width: double.infinity,
+        child: FloatingActionButton(
+          backgroundColor: colors().blue,
+          onPressed: () {
+            NavigatorHelper().push(context: context, page: AddItem());
+          },
+          child: Icon(
+            EneftyIcons.add_square_outline,
+            size: 30,
+            color: Colors.white,
+          ),
         ),
       ),
     );

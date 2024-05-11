@@ -1,6 +1,6 @@
 import 'package:authentication/controller/item_provider/item_provider.dart';
 import 'package:authentication/model/itemmodel.dart';
-import 'package:authentication/view/profile/my_products/widget/edit_page.dart';
+import 'package:authentication/view/bottom_bar/profile/my_products/widget/edit_page.dart';
 import 'package:authentication/widgets/navigator_widget.dart';
 import 'package:authentication/widgets/snack_bar_widgets.dart';
 import 'package:authentication/widgets/text_widget.dart';

@@ -1,7 +1,7 @@
 import 'package:authentication/theme/colors.dart';
-import 'package:authentication/view/favourites/widget/fav_widget.dart';
+import 'package:authentication/view/bottom_bar/favourites/widget/fav_widget.dart';
 import 'package:flutter/material.dart';
-import '../../widgets/text_widget.dart';
+import '../../../widgets/text_widget.dart';
 
 class Favourites extends StatefulWidget {
   const Favourites({Key? key}) : super(key: key);

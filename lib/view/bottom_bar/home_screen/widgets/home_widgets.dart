@@ -13,7 +13,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../widgets/circleavatar_widget.dart';
+import '../../../../widgets/circleavatar_widget.dart';
 
 class HomeWidgets {
   final firebseauth = FirebaseAuth.instance.currentUser;

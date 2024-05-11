@@ -7,8 +7,8 @@ class UserModel {
   String? image;
 
   UserModel(
-      {required this.email,
-      required this.firstname,
+      {this.email,
+      this.firstname,
       this.lastname,
       this.phoneNumber,
       this.uId,

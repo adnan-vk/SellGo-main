@@ -1,5 +1,5 @@
 import 'package:authentication/controller/authentication/auth_controller.dart';
-import 'package:authentication/view/phone_page/phone.dart';
+import 'package:authentication/view/authentication/phone_page/phone.dart';
 import 'package:authentication/widgets/botton_widget.dart';
 import 'package:authentication/widgets/card_widget.dart';
 import 'package:authentication/widgets/navigator_widget.dart';

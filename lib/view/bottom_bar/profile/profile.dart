@@ -1,10 +1,10 @@
 import 'package:authentication/controller/authentication/auth_controller.dart';
 import 'package:authentication/theme/colors.dart';
-import 'package:authentication/view/favourites/favourites.dart';
-import 'package:authentication/view/profile/my_products/my_products.dart';
-import 'package:authentication/view/profile/help_and_support/help_support.dart';
-import 'package:authentication/view/profile/useredit/useredit.dart';
-import 'package:authentication/view/profile/widgets/profile_widget.dart';
+import 'package:authentication/view/bottom_bar/favourites/favourites.dart';
+import 'package:authentication/view/bottom_bar/profile/my_products/my_products.dart';
+import 'package:authentication/view/bottom_bar/profile/help_and_support/help_support.dart';
+import 'package:authentication/view/bottom_bar/profile/useredit/useredit.dart';
+import 'package:authentication/view/bottom_bar/profile/widgets/profile_widget.dart';
 import 'package:authentication/widgets/text_widget.dart';
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';

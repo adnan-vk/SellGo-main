@@ -106,7 +106,7 @@ class AuthService {
           await FirebaseAuth.instance.signInWithCredential(credential);
 
       final User? guser = userCredential.user;
-      log("${guser?.displayName}");
+      log("user display Name : ${guser?.displayName}");
       return guser;
     } catch (e) {
       print('Google Sign-In Error: $e');
@@ -180,7 +180,7 @@ class AuthService {
 
       List<UserModel> data =
           snapshot.docs.map((e) => UserModel.fromJson(e.data())).toList();
-
+      log("data leangth : ${data.length}");
       return data;
     } catch (e) {
       log('get error: $e');

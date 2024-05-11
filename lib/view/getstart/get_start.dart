@@ -1,5 +1,5 @@
 import 'package:authentication/theme/colors.dart';
-import 'package:authentication/view/signin_screen/sign_in.dart';
+import 'package:authentication/view/authentication/signin_screen/sign_in.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/botton_widget.dart';

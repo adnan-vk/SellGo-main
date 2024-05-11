@@ -1,6 +1,6 @@
 import 'package:authentication/controller/authentication/auth_controller.dart';
 import 'package:authentication/controller/bottom_provider/bottom_prov.dart';
-import 'package:authentication/view/signin_screen/sign_in.dart';
+import 'package:authentication/view/authentication/signin_screen/sign_in.dart';
 import 'package:authentication/widgets/navigator_widget.dart';
 import 'package:authentication/widgets/text_widget.dart';
 import 'package:enefty_icons/enefty_icons.dart';

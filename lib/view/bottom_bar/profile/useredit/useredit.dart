@@ -24,7 +24,6 @@ class _UserEditState extends State<UserEdit> {
   TextEditingController phoneEditController = TextEditingController();
   @override
   void initState() {
-    final pro = Provider.of<AuthenticationProvider>(context, listen: false);
     super.initState();
     firstNameEditController.text = widget.user.firstname ?? "";
     lastNameEditController.text = widget.user.lastname ?? "";
@@ -34,7 +33,6 @@ class _UserEditState extends State<UserEdit> {
 
   @override
   Widget build(BuildContext context) {
-    final pro = Provider.of<ItemProvider>(context, listen: false);
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
