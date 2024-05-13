@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:authentication/controller/item_provider/item_provider.dart';
 import 'package:authentication/controller/authentication/auth_controller.dart';
 import 'package:authentication/controller/bottom_provider/bottom_prov.dart';
@@ -27,27 +25,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Razorpay razorpay = Razorpay();
-
-  @override
-  void initState() {
-    super.initState();
-    razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
-    razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
-    razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
-  }
-
-  void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    log('Payment error: response.code - response.message');
-    // Payment successful logic
-  }
-
-  void _handlePaymentError(PaymentFailureResponse response) {
-    // Payment error logic
-  }
-
-  void _handleExternalWallet(ExternalWalletResponse response) {
-    // External wallet logic
-  }
 
   @override
   Widget build(BuildContext context) {

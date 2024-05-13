@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:authentication/controller/chat_provider/chat_provider.dart';
 import 'package:authentication/view/details/chatpage/chat.dart';
 import 'package:authentication/widgets/navigator_widget.dart';
@@ -12,7 +11,6 @@ class ChatList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Provider.of<ChatProvider>(context, listen: false).getAllChats();
-    log("chat liast");
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -20,34 +18,52 @@ class ChatList extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
       body: Consumer<ChatProvider>(
-        builder: (context, value, child) => ListView.builder(
-          itemCount: value.myAllChat.length,
-          itemBuilder: (context, index) {
-            final user = value.myAllChat[index];
-            return Card(
-              elevation: 4,
-              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 17),
-              child: ListTile(
-                contentPadding: EdgeInsets.all(10),
-                leading: CircleAvatar(
-                  backgroundColor: Colors.blue,
-                  child: Icon(Icons.person, color: Colors.white),
-                ),
-                title: Text(
-                  "${user.userInfo!.firstname}",
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-                onTap: () {
-                  NavigatorHelper().push(
-                      context: context,
-                      page: ChatPage(userinfo: user.userInfo!));
+        builder: (context, value, child) => value.myAllChat.isEmpty
+            ? Center(child: Text("No chats available"))
+            : ListView.builder(
+                itemCount: value.myAllChat.length,
+                itemBuilder: (context, index) {
+                  final user = value.myAllChat[index];
+                  // final lastmessage = value.allMessage[0];
+                  return Card(
+                    elevation: 4,
+                    margin: EdgeInsets.symmetric(vertical: 8, horizontal: 17),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    child: ListTile(
+                      contentPadding: EdgeInsets.all(10),
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.blue,
+                        backgroundImage:
+                            NetworkImage(user.userInfo!.image ?? ''),
+                        child: user.userInfo!.image == null
+                            ? Icon(Icons.person, color: Colors.white)
+                            : null,
+                      ),
+                      title: TextWidget().text(
+                          data: user.userInfo!.firstname,
+                          size: 18.0,
+                          weight: FontWeight.bold),
+                      // subtitle: Text(
+                      //   "Last message: ${lastmessage}",
+                      //   style: TextStyle(
+                      //     fontSize: 14,
+                      //     color: Colors.grey[600],
+                      //   ),
+                      //   maxLines: 1,
+                      //   overflow: TextOverflow.ellipsis,
+                      // ),
+                      onTap: () {
+                        NavigatorHelper().push(
+                          context: context,
+                          page: ChatPage(userinfo: user.userInfo!),
+                        );
+                      },
+                    ),
+                  );
                 },
               ),
-            );
-          },
-        ),
       ),
     );
   }

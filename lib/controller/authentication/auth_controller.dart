@@ -34,13 +34,6 @@ class AuthenticationProvider extends ChangeNotifier {
   bool showOtpField = false;
 
   Future<UserCredential> signUpEmail(String email, String password) async {
-    // final user = UserModel(
-    //     email: firebaseAuth.currentUser!.email,
-    //     phoneNumber: firebaseAuth.currentUser.p,
-    //     firstname: firstnamecontroller.text,
-    //     uId: firebaseAuth.currentUser!.uid,
-    //     lastname: lastnamecontroller.text);
-    // authService.addUser(user);
     return await authService.signUpEmail(email, password);
   }
 
@@ -137,7 +130,6 @@ class AuthenticationProvider extends ChangeNotifier {
   }
 
   getProductUser(String uId) async {
-    // sortedUser;
     List<UserModel> allUsers = await authService.getAllUser();
     sortedUser = allUsers.firstWhere((element) => element.uId == uId);
     notifyListeners();

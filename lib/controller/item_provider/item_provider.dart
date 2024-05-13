@@ -8,7 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ItemProvider extends ChangeNotifier { 
+class ItemProvider extends ChangeNotifier {
   List listItems = [
     "Computer",
     "MobilePhones",
@@ -65,7 +65,7 @@ class ItemProvider extends ChangeNotifier {
     getProduct();
   }
 
-  void getProduct() async {
+  getProduct() async {
     allproducts = await productservice.getAllProducts();
     notifyListeners();
   }
@@ -113,6 +113,7 @@ class ItemProvider extends ChangeNotifier {
   Future<void> favouritesClicked(String id, bool status) async {
     await productservice.favListClicked(id, status);
     notifyListeners();
+    await getProduct();
   }
 
   bool favListCheck(ProductModel product) {

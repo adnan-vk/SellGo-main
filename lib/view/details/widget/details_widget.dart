@@ -1,4 +1,7 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 int selectedImageIndex = 0;
 
@@ -57,32 +60,17 @@ class DetailWidget {
       ),
     );
   }
-//   showLargeImage(String imageUrl, context) {
-//     showDialog(
-//       context: context,
-//       builder: (BuildContext context) {
-//         return Dialog(
-//           child: Image.network(
-//             imageUrl,
-//             fit: BoxFit.contain,
-//           ),
-//         );
-//       },
-//     );
-//   }
 
-//   buildDot(int index, context) {
-//     final pro = Provider.of(context, listen: false);
-//     return Padding(
-//       padding: EdgeInsets.symmetric(horizontal: 4.0),
-//       child: Container(
-//         width: 8,
-//         height: 8,
-//         decoration: BoxDecoration(
-//           shape: BoxShape.circle,
-//           color: pro.selectedImageIndex == index ? Colors.blue : Colors.grey,
-//         ),
-//       ),
-//     );
-//   }
+  void launchPhone(String phoneNumber) async {
+    final Uri phoneLaunchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+
+    if (await canLaunch(phoneLaunchUri.toString())) {
+      await launch(phoneLaunchUri.toString());
+    } else {
+      throw 'Could not launch $phoneLaunchUri';
+    }
+  }
 }

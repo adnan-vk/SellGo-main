@@ -27,7 +27,6 @@ class _UserEditState extends State<UserEdit> {
     super.initState();
     firstNameEditController.text = widget.user.firstname ?? "";
     lastNameEditController.text = widget.user.lastname ?? "";
-    // emailEditController.text = widget.user.email ?? "";
     phoneEditController.text = widget.user.phoneNumber ?? "";
   }
 

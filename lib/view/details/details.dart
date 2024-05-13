@@ -92,6 +92,7 @@ class _DetailsState extends State<Details> {
                     );
                   },
                   onPageChanged: (index) {
+                    // value.selectedImageIndex = index;
                     setState(() {
                       selectedImageIndex = index;
                     });
@@ -188,11 +189,17 @@ class _DetailsState extends State<Details> {
                                       color: Colors.grey,
                                     ),
                                   ),
-                                  TextWidget().text(
-                                    data: value.sortedUser?.phoneNumber,
-                                    size: 14.0,
-                                    color: Colors.grey,
-                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      DetailWidget().launchPhone(
+                                          "${value.sortedUser?.phoneNumber}");
+                                    },
+                                    child: TextWidget().text(
+                                      data: value.sortedUser?.phoneNumber,
+                                      size: 14.0,
+                                      color: Colors.grey,
+                                    ),
+                                  )
                                 ],
                               ),
                               widget.thisUser!

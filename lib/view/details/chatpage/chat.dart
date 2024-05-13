@@ -3,6 +3,7 @@
 import 'package:authentication/controller/chat_provider/chat_provider.dart';
 import 'package:authentication/model/authmodel.dart';
 import 'package:authentication/service/chat_service/chat_service.dart';
+import 'package:authentication/widgets/mediaquery_widget.dart';
 import 'package:authentication/widgets/navigator_widget.dart';
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -126,16 +127,6 @@ class _ChatPageState extends State<ChatPage> {
   }
 }
 
-class MediaQueryWidget {
-  double width(BuildContext context, double size) {
-    return MediaQuery.of(context).size.width * size;
-  }
-
-  double height(BuildContext context, double size) {
-    return MediaQuery.of(context).size.height * size;
-  }
-}
-
 class ChatBubble extends StatelessWidget {
   final bool isSent;
   final String message;
@@ -184,21 +175,16 @@ class ChatBubble extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(message),
-              // TextsWidget().costumParagraphText(context,
-              //     text: message,
-              //     bold: false,
-              //     trimLength: 300,
-              //     textAlign: TextAlign.justify,
-              //     color: isSent ? Colors.black : Colors.white),
+              TextWidget().text(
+                  data: message,
+                  color: isSent ? Colors.black : Colors.white,
+                  align: TextAlign.justify),
               SizedBox(height: MediaQueryWidget().width(context, .02)),
-              Text(time),
-              // CustomText(
-              //     text: time,
-              //     bold: false,
-              //     size: 13,
-              //     textAlign: TextAlign.right,
-              //     color: isSent ? Colors.black : Colors.white),
+              TextWidget().text(
+                  data: time,
+                  size: 13.0,
+                  align: TextAlign.right,
+                  color: isSent ? Colors.black : Colors.white),
             ],
           ),
         ),

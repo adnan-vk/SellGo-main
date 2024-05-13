@@ -18,12 +18,12 @@ class _RazorpayAmountScreenState extends State<RazorpayAmountScreen> {
   void openRazorpayPayment(int amount) async {
     amount = amount * 100;
     var options = {
-      'key': 'rzp-test-1DP5nmDlF5G5ag',
+      'key': 'rzp_test_1DP5nm0lF5G5ag',
       'amount': amount,
       'name': 'Product Payment',
       'prefill': {
         'contact': '1234567890',
-        'email': 'example@example.com',
+        'email': 'test@gmail.com',
       },
       'external': {
         'wallets': ['paytm'],

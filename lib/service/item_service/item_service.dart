@@ -114,7 +114,7 @@ class ItemService {
   deleteProduct(productid) async {
     try {
       await product.doc(productid).delete();
-      log("The product idd deleted");
+      log("The product id deleted");
     } catch (e) {
       log("the product is not deletd $e");
     }

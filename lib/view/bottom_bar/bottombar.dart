@@ -41,7 +41,7 @@ class BottomBar extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Icon(EneftyIcons.message_outline),
             activeIcon: Icon(EneftyIcons.message_bold),
-            label: 'Profile',
+            label: 'Messages',
           ),
           BottomNavigationBarItem(
             icon: Icon(EneftyIcons.profile_circle_outline),

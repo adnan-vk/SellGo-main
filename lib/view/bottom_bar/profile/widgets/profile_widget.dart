@@ -49,7 +49,7 @@ class ProfileWidget {
             TextButton(
               onPressed: () {
                 pro.signOutEmail();
-                pro.googleSignout(); 
+                pro.googleSignout();
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(

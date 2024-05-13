@@ -13,7 +13,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   String? verificationid;
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String collection = 'User';
   Reference storage = FirebaseStorage.instance.ref();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -180,7 +180,6 @@ class AuthService {
 
       List<UserModel> data =
           snapshot.docs.map((e) => UserModel.fromJson(e.data())).toList();
-      log("data leangth : ${data.length}");
       return data;
     } catch (e) {
       log('get error: $e');

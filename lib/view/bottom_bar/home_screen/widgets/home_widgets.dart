@@ -202,9 +202,10 @@ class HomeWidgets {
                                   ),
                                 ),
                                 GestureDetector(
-                                  onTap: () {
+                                  onTap: () async {
                                     final wish = value.favListCheck(product);
-                                    value.favouritesClicked(product.id!, wish);
+                                    await value.favouritesClicked(
+                                        product.id!, wish);
                                   },
                                   child: value.favListCheck(product)
                                       ? Icon(
