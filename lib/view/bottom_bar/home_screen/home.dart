@@ -41,7 +41,9 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: size.height * .015),
-            HomeWidgets().categoryAvatarListView(context,),
+            HomeWidgets().categoryAvatarListView(
+              context,
+            ),
             SizedBox(height: size.height * .015),
             HomeWidgets().productList(context)
           ],

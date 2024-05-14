@@ -18,7 +18,7 @@ class _RazorpayAmountScreenState extends State<RazorpayAmountScreen> {
   void openRazorpayPayment(int amount) async {
     amount = amount * 100;
     var options = {
-      'key': 'rzp_test_1DP5nm0lF5G5ag',
+      'key': 'rzp_test_CYrnTOG3W2cDCB',
       'amount': amount,
       'name': 'Product Payment',
       'prefill': {
@@ -136,3 +136,8 @@ class _RazorpayAmountScreenState extends State<RazorpayAmountScreen> {
     );
   }
 }
+
+
+
+// key_id,key_secret
+// rzp_test_CYrnTOG3W2cDCB,Zq01KM6L54ebO4XpZyghHcRA
