@@ -5,7 +5,7 @@ import 'package:authentication/model/itemmodel.dart';
 import 'package:authentication/theme/colors.dart';
 import 'package:authentication/view/details/call/call.dart';
 import 'package:authentication/view/details/chatpage/chat.dart';
-import 'package:authentication/view/details/razorpay/razerpay.dart';
+import 'package:authentication/view/details/payment/payment.dart';
 import 'package:authentication/view/details/widget/details_widget.dart';
 import 'package:authentication/view/details/location/location.dart';
 import 'package:authentication/widgets/circleavatar_widget.dart';
@@ -147,12 +147,9 @@ class _DetailsState extends State<Details> {
                 ],
               ),
               SizedBox(height: 10),
-              Text(widget.product.category.toString()),
-              SizedBox(height: 10),
-              Text(widget.product.description.toString()),
-              SizedBox(height: 20),
               Card(
-                elevation: 2,
+                elevation: 0,
+                color: Colors.grey[200],
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -221,6 +218,11 @@ class _DetailsState extends State<Details> {
                   ),
                 ),
               ),
+              SizedBox(height: 10),
+              Text(widget.product.category.toString()),
+              SizedBox(height: 10),
+              Text(widget.product.description.toString()),
+              SizedBox(height: 20),
               widget.thisUser!
                   ? SizedBox.shrink()
                   : ElevatedButton(
@@ -228,7 +230,7 @@ class _DetailsState extends State<Details> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => RazorpayAmountScreen(),
+                            builder: (context) => PaymentScreen(),
                           ),
                         );
                       },

@@ -1,6 +1,10 @@
 import 'package:authentication/controller/authentication/auth_controller.dart';
 import 'package:authentication/controller/bottom_provider/bottom_prov.dart';
 import 'package:authentication/view/authentication/signin_screen/sign_in.dart';
+import 'package:authentication/view/bottom_bar/favourites/favourites.dart';
+import 'package:authentication/view/bottom_bar/profile/help_and_support/help_support.dart';
+import 'package:authentication/view/bottom_bar/profile/my_products/my_products.dart';
+import 'package:authentication/widgets/mediaquery_widget.dart';
 import 'package:authentication/widgets/navigator_widget.dart';
 import 'package:authentication/widgets/text_widget.dart';
 import 'package:enefty_icons/enefty_icons.dart';
@@ -64,6 +68,31 @@ class ProfileWidget {
           ],
         );
       },
+    );
+  }
+
+  profileCards(context) {
+    return Column(
+      children: [
+        ProfileWidget().container(
+            context: context, page: Favourites(), text: "Favourites"),
+        SizedBox(height: MediaQueryWidget().height(context, .03)),
+        // ProfileWidget().container(text: "Payments"),
+        // SizedBox(
+        //   height: MediaQueryWidget().height(context, .03),
+        // ),
+        ProfileWidget().container(
+            page: MyProducts(), context: context, text: "My Products"),
+        SizedBox(
+          height: MediaQueryWidget().height(context, .03),
+        ),
+        ProfileWidget().container(
+            text: "Help and support", page: HelpSupport(), context: context),
+        SizedBox(
+          height: MediaQueryWidget().height(context, .03),
+        ),
+        TextWidget().text(data: "v 1.0.1", size: 10.0)
+      ],
     );
   }
 }

@@ -12,7 +12,6 @@ class AuthenticationProvider extends ChangeNotifier {
   UserModel? currentUser;
   UserModel? sortedUser;
   final AuthService authService = AuthService();
-  TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
@@ -93,7 +92,6 @@ class AuthenticationProvider extends ChangeNotifier {
   }
 
   clearControllers() {
-    usernameController.clear();
     firstnamecontroller.clear();
     lastnamecontroller.clear();
     emailController.clear();

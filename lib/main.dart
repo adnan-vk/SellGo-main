@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
           create: (context) => BottomProvider(),
         ),
         ChangeNotifierProvider(
-          create: (context) => ChatProvider(),
+          create: (context) => ChatController(),
         ),
       ],
       child: MaterialApp(

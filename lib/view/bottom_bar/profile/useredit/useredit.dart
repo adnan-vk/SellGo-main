@@ -2,6 +2,8 @@ import 'package:authentication/controller/authentication/auth_controller.dart';
 import 'package:authentication/controller/item_provider/item_provider.dart';
 import 'package:authentication/widgets/navigator_widget.dart';
 import 'package:authentication/widgets/snack_bar_widgets.dart';
+import 'package:authentication/widgets/text_widget.dart';
+import 'package:authentication/widgets/textfield_widget.dart';
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -47,38 +49,26 @@ class _UserEditState extends State<UserEdit> {
         child: Center(
           child: Column(
             children: [
-              Text(
-                "Edit User Details",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
+              TextWidget().text(
+                  data: "Edit User Details",
+                  size: 20.0,
+                  weight: FontWeight.bold),
               SizedBox(height: size.height * .03),
-              TextFormField(
-                controller: firstNameEditController,
-                decoration: InputDecoration(hintText: "First Name"),
-              ),
+              textFormField().textformfield(
+                  controller: firstNameEditController, hinttext: "First Name"),
               SizedBox(height: size.height * .03),
-              TextFormField(
-                controller: lastNameEditController,
-                decoration: InputDecoration(hintText: "Last Name"),
-              ),
+              textFormField().textformfield(
+                  controller: lastNameEditController, hinttext: "Last Name"),
               SizedBox(height: size.height * .03),
-              // TextFormField(
-              //   controller: emailEditController,
-              //   decoration: InputDecoration(hintText: "Email"),
-              // ),
-              // SizedBox(height: size.height * .03),
-              TextFormField(
-                controller: phoneEditController,
-                decoration: InputDecoration(hintText: "Phone Number"),
-              ),
+              textFormField().textformfield(
+                  controller: phoneEditController, hinttext: "Phone Number"),
               SizedBox(height: size.height * .03),
               ElevatedButton(
                 onPressed: () async {
-                  // await pro.startLoading(true);
                   await updateUser(context, widget.user);
-                  // await pro.startLoading(false);
                 },
-                child: Text('Update'),
+                child:
+                    TextWidget().text(data: "Update", weight: FontWeight.bold),
               ),
             ],
           ),

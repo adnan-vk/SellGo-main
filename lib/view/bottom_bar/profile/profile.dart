@@ -1,8 +1,5 @@
 import 'package:authentication/controller/authentication/auth_controller.dart';
 import 'package:authentication/theme/colors.dart';
-import 'package:authentication/view/bottom_bar/favourites/favourites.dart';
-import 'package:authentication/view/bottom_bar/profile/my_products/my_products.dart';
-import 'package:authentication/view/bottom_bar/profile/help_and_support/help_support.dart';
 import 'package:authentication/view/bottom_bar/profile/useredit/useredit.dart';
 import 'package:authentication/view/bottom_bar/profile/widgets/profile_widget.dart';
 import 'package:authentication/widgets/text_widget.dart';
@@ -18,8 +15,12 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     final firebaseauth = FirebaseAuth.instance.currentUser;
     final size = MediaQuery.of(context).size;
-    final pro = Provider.of<AuthenticationProvider>(context, listen: false);
-    // pro.getCurrentUser();
+    ImageProvider? imageprovider;
+    if (firebaseauth != null && firebaseauth.photoURL != null) {
+      imageprovider = NetworkImage(firebaseauth.photoURL.toString());
+    } else {
+      imageprovider = AssetImage("assets/images/default image.jpg");
+    }
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -43,12 +44,7 @@ class Profile extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 60,
-                    backgroundImage: firebaseauth!.photoURL != null
-                        ? NetworkImage(FirebaseAuth
-                            .instance.currentUser!.photoURL
-                            .toString())
-                        : AssetImage('') as ImageProvider,
-                    backgroundColor: Colors.black,
+                    backgroundImage: imageprovider,
                   ),
                   Positioned(
                       bottom: 0,
@@ -62,80 +58,62 @@ class Profile extends StatelessWidget {
               SizedBox(
                 height: size.height * .05,
               ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.grey[200],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          width: size.width * .64,
-                          child: TextWidget().text(
-                              data:
-                                  "${pro.currentUser?.firstname!.toUpperCase()} ${pro.currentUser?.lastname!.toUpperCase()}",
-                              size: size.width * .06,
-                              weight: FontWeight.bold),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) =>
-                                  UserEdit(user: pro.currentUser!),
-                            );
-                          },
-                          child: TextWidget().text(
-                              data: "Edit",
-                              color: colors().blue,
-                              weight: FontWeight.bold),
-                        )
-                      ],
-                    ),
-                    SizedBox(height: size.height * .015),
-                    TextWidget().text(
-                      data: "Email : ${pro.currentUser?.email.toString()}",
-                      size: size.width * .04,
-                    ),
-                    SizedBox(height: size.height * .015),
-                    TextWidget().text(
-                      data: "Phone : ${pro.currentUser?.phoneNumber ?? " "}",
-                      size: size.width * .042,
-                    ),
-                  ],
+              Consumer<AuthenticationProvider>(
+                builder: (context, value, child) => Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.grey[200],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: size.width * .64,
+                            child: TextWidget().text(
+                                data:
+                                    "${value.currentUser?.firstname!.toUpperCase()} ${value.currentUser?.lastname!.toUpperCase()}",
+                                size: size.width * .06,
+                                weight: FontWeight.bold),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) =>
+                                    UserEdit(user: value.currentUser!),
+                              );
+                            },
+                            child: TextWidget().text(
+                                data: "Edit",
+                                color: colors().blue,
+                                weight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                      SizedBox(height: size.height * .015),
+                      TextWidget().text(
+                        data: "Email : ${value.currentUser?.email.toString()}",
+                        size: size.width * .04,
+                      ),
+                      SizedBox(height: size.height * .015),
+                      TextWidget().text(
+                        data:
+                            "Phone : ${value.currentUser?.phoneNumber ?? " "}",
+                        size: size.width * .042,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
                 height: size.height * .05,
               ),
-              ProfileWidget().container(
-                  context: context, page: Favourites(), text: "Favourites"),
-              SizedBox(
-                height: size.height * .03,
-              ),
-              ProfileWidget().container(text: "Payments"),
-              SizedBox(
-                height: size.height * .03,
-              ),
-              ProfileWidget().container(
-                  page: MyProducts(), context: context, text: "My Products"),
-              SizedBox(
-                height: size.height * .03,
-              ),
-              ProfileWidget().container(
-                  text: "Help and support",
-                  page: HelpSupport(),
-                  context: context),
-              SizedBox(
-                height: size.height * .03,
-              ),
-              TextWidget().text(data: "v 1.0.1", size: size.width * .03)
+              ProfileWidget().profileCards(context)
             ],
           ),
         ),

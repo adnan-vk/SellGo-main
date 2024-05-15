@@ -10,14 +10,14 @@ class ChatList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<ChatProvider>(context, listen: false).getAllChats();
+    Provider.of<ChatController>(context, listen: false).getAllChats();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: TextWidget().text(data: "Chats"),
         automaticallyImplyLeading: false,
       ),
-      body: Consumer<ChatProvider>(
+      body: Consumer<ChatController>(
         builder: (context, value, child) => value.myAllChat.isEmpty
             ? Center(child: Text("No chats available"))
             : ListView.builder(

@@ -10,7 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:authentication/utils/utils.dart';
 import 'package:flutter/material.dart';
 
-class ChatProvider extends ChangeNotifier {
+class ChatController extends ChangeNotifier {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   TextEditingController messageController = TextEditingController();
   ChatService chatService = ChatService();

@@ -17,13 +17,18 @@ import '../../../../widgets/circleavatar_widget.dart';
 
 class HomeWidgets {
   final firebseauth = FirebaseAuth.instance.currentUser;
+  ImageProvider? imageprovider;
   topwidget(context) {
     final size = MediaQuery.of(context).size;
+    if (firebseauth != null && firebseauth!.photoURL != null) {
+      imageprovider = NetworkImage(firebseauth!.photoURL.toString());
+    } else {
+      imageprovider = AssetImage("assets/images/default image.jpg");
+    }
     return Row(
       children: [
         circleavatar().circleAvatar(
-          image: NetworkImage(firebseauth!.photoURL.toString()),
-          bgcolor: Colors.black,
+          image: imageprovider,
           context: context,
           radius: 20.0,
         ),
@@ -121,6 +126,7 @@ class HomeWidgets {
   productList(context) {
     final pro = Provider.of<ItemProvider>(context, listen: false);
     final authpro = Provider.of<AuthenticationProvider>(context, listen: false);
+    bool? thisuser;
     pro.getProduct();
     final size = MediaQuery.of(context).size;
     int crossAxisCount = (size.width / 200).floor();
@@ -143,9 +149,9 @@ class HomeWidgets {
             final product = value.searchlist.isNotEmpty
                 ? value.searchlist[index]
                 : value.allproducts[index];
-            return GestureDetector(
+            return GestureDetector( 
               onTap: () async {
-                bool? thisuser;
+                
                 if (product.uid == firebseauth!.uid) {
                   thisuser = true;
                 } else {

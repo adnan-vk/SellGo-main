@@ -28,14 +28,14 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     super.initState();
-    Provider.of<ChatProvider>(context, listen: false).scrollController =
+    Provider.of<ChatController>(context, listen: false).scrollController =
         ScrollController();
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final pro = Provider.of<ChatProvider>(context, listen: false);
+    final pro = Provider.of<ChatController>(context, listen: false);
     pro.getMessages(widget.userinfo.uId!);
     return Scaffold(
       appBar: AppBar(
@@ -68,7 +68,7 @@ class _ChatPageState extends State<ChatPage> {
         child: Column(
           children: [
             Expanded(
-              child: Consumer<ChatProvider>(
+              child: Consumer<ChatController>(
                 builder: (context, value, child) {
                   return value.allMessage.isEmpty
                       ? Center(

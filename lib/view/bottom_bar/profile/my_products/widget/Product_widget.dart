@@ -48,10 +48,13 @@ class ProductWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        TextWidget().text(
-                            data: product.productname ?? "",
-                            size: 16.0,
-                            weight: FontWeight.bold),
+                        SizedBox(
+                          width: size.width * .38,
+                          child: TextWidget().text(
+                              data: product.productname ?? "",
+                              size: 16.0,
+                              weight: FontWeight.bold),
+                        ),
                         IconButton(
                           icon: Icon(
                             EneftyIcons.bag_bold,
