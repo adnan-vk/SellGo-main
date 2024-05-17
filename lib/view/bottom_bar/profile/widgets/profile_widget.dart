@@ -43,7 +43,7 @@ class ProfileWidget {
         return AlertDialog(
           title: TextWidget().text(data: "Logout"),
           content: TextWidget().text(data: "Are you sure you want to logout?"),
-          actions: <Widget>[
+          actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();

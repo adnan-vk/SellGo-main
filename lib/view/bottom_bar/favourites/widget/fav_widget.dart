@@ -31,9 +31,10 @@ class favWidget {
                       thisuser = false;
                     }
                     NavigatorHelper().push(
-                        context: context,
-                        page: Details(
-                            product: favlistItems[index], thisUser: thisuser!));
+                      context: context,
+                      page: Details(
+                          product: favlistItems[index], thisUser: thisuser!),
+                    );
                   },
                   child: Card(
                     elevation: 0,
