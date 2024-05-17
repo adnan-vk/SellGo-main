@@ -22,7 +22,6 @@ class UserEdit extends StatefulWidget {
 class _UserEditState extends State<UserEdit> {
   TextEditingController firstNameEditController = TextEditingController();
   TextEditingController lastNameEditController = TextEditingController();
-  // TextEditingController emailEditController = TextEditingController();S
   TextEditingController phoneEditController = TextEditingController();
   @override
   void initState() {
@@ -31,6 +30,8 @@ class _UserEditState extends State<UserEdit> {
     lastNameEditController.text = widget.user.lastname ?? "";
     phoneEditController.text = widget.user.phoneNumber ?? "";
   }
+
+  final formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -44,33 +45,57 @@ class _UserEditState extends State<UserEdit> {
             },
             icon: Icon(EneftyIcons.arrow_left_3_outline)),
       ),
-      body: Container(
-        padding: EdgeInsets.all(20),
-        child: Center(
-          child: Column(
-            children: [
-              TextWidget().text(
-                  data: "Edit User Details",
-                  size: 20.0,
-                  weight: FontWeight.bold),
-              SizedBox(height: size.height * .03),
-              textFormField().textformfield(
-                  controller: firstNameEditController, hinttext: "First Name"),
-              SizedBox(height: size.height * .03),
-              textFormField().textformfield(
-                  controller: lastNameEditController, hinttext: "Last Name"),
-              SizedBox(height: size.height * .03),
-              textFormField().textformfield(
-                  controller: phoneEditController, hinttext: "Phone Number"),
-              SizedBox(height: size.height * .03),
-              ElevatedButton(
-                onPressed: () async {
-                  await updateUser(context, widget.user);
-                },
-                child:
-                    TextWidget().text(data: "Update", weight: FontWeight.bold),
+      body: Form(
+        key: formkey,
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.all(20),
+            child: Center(
+              child: Column(
+                children: [
+                  TextWidget().text(
+                      data: "Edit User Details",
+                      size: 20.0,
+                      weight: FontWeight.bold),
+                  SizedBox(height: size.height * .03),
+                  textFormField().textformfield(
+                      maxline: 1,
+                      type: 'firstName',
+                      controller: firstNameEditController,
+                      hinttext: "First Name"),
+                  SizedBox(height: size.height * .03),
+                  textFormField().textformfield(
+                      maxline: 1,
+                      controller: lastNameEditController,
+                      hinttext: "Last Name"),
+                  SizedBox(height: size.height * .03),
+                  textFormField().textformfield(
+                      type: "phone",
+                      max: 10,
+                      keytype: TextInputType.phone,
+                      controller: phoneEditController,
+                      hinttext: "Phone Number"),
+                  SizedBox(height: size.height * .03),
+                  ElevatedButton(
+                    onPressed: () async {
+                      if (formkey.currentState!.validate()) {
+                        try {
+                          updateUser(context, widget.user);
+                          Navigator.pop(context);
+                          snackBarWidget().iconSnackSuccess(context,
+                              label: "Account has been created successfully");
+                        } catch (e) {
+                          snackBarWidget().iconSnackFail(context,
+                              label: "Account not created, try again");
+                        }
+                      }
+                    },
+                    child: TextWidget()
+                        .text(data: "Update", weight: FontWeight.bold),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

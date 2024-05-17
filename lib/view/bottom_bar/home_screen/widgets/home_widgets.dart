@@ -149,9 +149,8 @@ class HomeWidgets {
             final product = value.searchlist.isNotEmpty
                 ? value.searchlist[index]
                 : value.allproducts[index];
-            return GestureDetector( 
+            return GestureDetector(
               onTap: () async {
-                
                 if (product.uid == firebseauth!.uid) {
                   thisuser = true;
                 } else {
@@ -159,13 +158,14 @@ class HomeWidgets {
                 }
                 await authpro.getProductUser(product.uid!);
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Details(
-                        thisUser: thisuser,
-                        product: product,
-                      ),
-                    ));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Details(
+                      thisUser: thisuser!,
+                      product: product,
+                    ),
+                  ),
+                );
               },
               child: Container(
                 child: Column(
@@ -176,13 +176,44 @@ class HomeWidgets {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.grey,
-                          image: DecorationImage(
-                              image: product.image != null
-                                  ? NetworkImage(
-                                      product.image![0],
-                                    ) as ImageProvider
-                                  : AssetImage('assets/images/dummy image.jpg'),
-                              fit: BoxFit.cover),
+                        ),
+                        child: Stack(
+                          children: [
+                            Image.network(
+                              product.image != null
+                                  ? product.image![0]
+                                  : 'assets/images/dummy image.jpg',
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                              height: double.infinity,
+                              loadingBuilder:
+                                  (context, child, loadingProgress) {
+                                if (loadingProgress == null) {
+                                  return child;
+                                } else {
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      color: colors().blue,
+                                      value:
+                                          loadingProgress.expectedTotalBytes !=
+                                                  null
+                                              ? loadingProgress
+                                                      .cumulativeBytesLoaded /
+                                                  loadingProgress
+                                                      .expectedTotalBytes!
+                                              : null,
+                                    ),
+                                  );
+                                }
+                              },
+                              errorBuilder: (context, error, stackTrace) {
+                                return Image.asset(
+                                  'assets/images/dummy image.jpg',
+                                  fit: BoxFit.cover,
+                                );
+                              },
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -207,7 +238,7 @@ class HomeWidgets {
                                     weight: FontWeight.bold,
                                   ),
                                 ),
-                                GestureDetector(
+                                InkWell(
                                   onTap: () async {
                                     final wish = value.favListCheck(product);
                                     await value.favouritesClicked(
@@ -222,6 +253,9 @@ class HomeWidgets {
                                           EneftyIcons.heart_bold,
                                           color: Colors.red,
                                         ),
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  splashColor: Colors.grey.withOpacity(0.3),
+                                  highlightColor: Colors.red.withOpacity(0.1),
                                 ),
                               ],
                             ),

@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   badges: ^3.1.2
+  cached_network_image: ^3.3.1
   carousel_slider: ^4.2.1
   cloud_firestore: ^4.14.0
   country_picker: ^2.0.25

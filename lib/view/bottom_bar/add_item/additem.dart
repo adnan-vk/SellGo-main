@@ -2,6 +2,7 @@ import 'package:authentication/controller/item_provider/item_provider.dart';
 import 'package:authentication/model/itemmodel.dart';
 import 'package:authentication/theme/colors.dart';
 import 'package:authentication/view/bottom_bar/add_item/widget/add_widget.dart';
+import 'package:authentication/widgets/navigator_widget.dart';
 import 'package:authentication/widgets/snack_bar_widgets.dart';
 import 'package:authentication/widgets/text_widget.dart';
 import 'package:enefty_icons/enefty_icons.dart';
@@ -17,6 +18,7 @@ class AddItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final pro = Provider.of<ItemProvider>(context);
+    // final notipro = Provider.of<NotificationController>(context, listen: false);
     return pro.isLoading
         ? Scaffold(
             body: Center(
@@ -32,7 +34,9 @@ class AddItem extends StatelessWidget {
               title: TextWidget().text(data: "Add Item", color: colors().black),
               centerTitle: true,
               leading: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  NavigatorHelper().pop(context: context);
+                },
                 icon: Icon(EneftyIcons.arrow_left_3_outline),
               ),
             ),
@@ -119,6 +123,9 @@ class AddItem extends StatelessWidget {
                               await pro.startLoading(true);
                               await pro.uploadImages();
                               await addData(context);
+                              // await notipro.sendNotification(
+                              //   receiverId: 
+                              // );
                               await pro.startLoading(false);
                               snackBarWidget().topsnackBar(context,
                                   message:

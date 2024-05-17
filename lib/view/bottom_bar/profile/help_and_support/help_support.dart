@@ -1,44 +1,118 @@
-import 'package:authentication/widgets/navigator_widget.dart';
-import 'package:authentication/widgets/text_widget.dart';
-import 'package:enefty_icons/enefty_icons.dart';
+// ignore_for_file: deprecated_member_use, use_key_in_widget_constructors
+
+import 'package:authentication/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HelpSupport extends StatelessWidget {
+  const HelpSupport({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          onPressed: () {
-            NavigatorHelper().pop(context: context);
-          },
-          icon: Icon(EneftyIcons.arrow_left_3_outline),
-        ),
-        centerTitle: true,
-        title: TextWidget().text(data: "Help & Support"),
+        title: const Text('Help Center'),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextWidget()
-                .text(data: "Contact Us:", size: 20.0, weight: FontWeight.bold),
-            SizedBox(height: 10),
-            TextWidget().text(data: "Email: support@sellgo.com", size: 16.0),
-            TextWidget().text(data: "Phone: +1 (XXX) XXX-XXXX", size: 16.0),
-            SizedBox(height: 20),
-            TextWidget()
-                .text(data: "FAQs:", size: 20.0, weight: FontWeight.bold),
-            SizedBox(height: 10),
-            TextWidget().text(
-                data: "1. How do I sell a product on Sellgo?", size: 16.0),
-            TextWidget()
-                .text(data: "2. How do I buy a product on Sellgo?", size: 16.0),
-          ],
-        ),
+      body: ListView(
+        padding: const EdgeInsets.all(16.0),
+        children: [
+          const SizedBox(height: 20),
+          const Text(
+            'Frequently Asked Questions',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 10),
+          const FAQItem(
+            question: '1. How do I create an account?',
+            answer: 'To create an account, click on the "Sign Up" button...',
+          ),
+          const FAQItem(
+            question: '2. How do I sell a product on Sellgo?',
+            answer:
+                'To sell a product on Sellgo, you need to create an account and list your product under the relevant category. Provide a detailed description, set your price, and upload high-quality images. Once listed, potential buyers can view and purchase your product.',
+          ),
+          const FAQItem(
+            question: '3. How can I contact customer support?',
+            answer:
+                'You can contact customer support by emailing us at support@sellgo.com or by calling our helpline at +91 7025646162. Our support team is available from 9 AM to 6 PM, Monday to Friday.',
+          ),
+          const FAQItem(
+            question: '4. What payment methods do you accept?',
+            answer:
+                'We accept credit/debit cards, PayPal, and bank transfers...',
+          ),
+          const SizedBox(height: 20),
+          const Text(
+            'Contact Information',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 10),
+          ListTile(
+            leading: const Icon(Icons.email),
+            title: const Text('Email: adnanvk12@gmail.com'),
+            onTap: () {
+              launchEmail('adnanvk12@gmail.com');
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.phone),
+            title: const Text('Phone: +91 702 564 61 62'),
+            onTap: () {
+              launchPhone('+917025646162');
+            },
+          ),
+        ],
       ),
+    );
+  }
+
+  void launchEmail(String email) async {
+    final Uri emailLaunchUri = Uri(
+      scheme: 'mailto',
+      path: email,
+    );
+
+    if (await canLaunch(emailLaunchUri.toString())) {
+      await launch(emailLaunchUri.toString());
+    } else {
+      throw 'Could not launch $emailLaunchUri';
+    }
+  }
+
+  void launchPhone(String phoneNumber) async {
+    final Uri phoneLaunchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+
+    if (await canLaunch(phoneLaunchUri.toString())) {
+      await launch(phoneLaunchUri.toString());
+    } else {
+      throw 'Could not launch $phoneLaunchUri';
+    }
+  }
+}
+
+class FAQItem extends StatelessWidget {
+  final String question;
+  final String answer;
+
+  const FAQItem({required this.question, required this.answer});
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      textColor: colors().blue,
+      title: Text(
+        question,
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text(answer),
+        ),
+      ],
     );
   }
 }

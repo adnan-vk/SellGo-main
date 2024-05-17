@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:authentication/controller/chat_provider/chat_provider.dart';
+import 'package:authentication/controller/notification_controller/notification_controller.dart';
 import 'package:authentication/model/authmodel.dart';
 import 'package:authentication/service/chat_service/chat_service.dart';
 import 'package:authentication/widgets/mediaquery_widget.dart';
@@ -34,6 +35,7 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
+    final notipro = Provider.of<NotificationController>(context, listen: false);
     final size = MediaQuery.of(context).size;
     final pro = Provider.of<ChatController>(context, listen: false);
     pro.getMessages(widget.userinfo.uId!);
@@ -113,6 +115,9 @@ class _ChatPageState extends State<ChatPage> {
                     onPressed: () async {
                       if (pro.messageController.text.isNotEmpty) {
                         await pro.sendMessage(widget.userinfo.uId!);
+                        await notipro.sendNotification(
+                            receiverId: widget.userinfo.uId,
+                            title: widget.userinfo.firstname);
                       }
                     },
                     icon: Icon(Icons.send),

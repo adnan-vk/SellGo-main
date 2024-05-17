@@ -42,8 +42,12 @@ class textFormField {
             return "OTP must contains 6 characters";
           }
         } else if (type == 'phone') {
-          if (value.length != 13) {
+          if (value.length != 10) {
             return "Please Enter Valid Phone Number";
+          }
+        } else if (type == "firstName") {
+          if (value.isEmpty) {
+            return "please enter a name";
           }
         }
         return null;

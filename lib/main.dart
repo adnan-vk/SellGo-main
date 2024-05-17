@@ -3,6 +3,7 @@ import 'package:authentication/controller/authentication/auth_controller.dart';
 import 'package:authentication/controller/bottom_provider/bottom_prov.dart';
 import 'package:authentication/controller/chat_provider/chat_provider.dart';
 import 'package:authentication/controller/favourites_provider/favourites_controller.dart';
+import 'package:authentication/controller/notification_controller/notification_controller.dart';
 import 'package:authentication/firebase_options.dart';
 import 'package:authentication/view/splash/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -44,6 +45,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (context) => ChatController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => NotificationController(),
         ),
       ],
       child: MaterialApp(

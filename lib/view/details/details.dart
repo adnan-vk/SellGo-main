@@ -2,15 +2,12 @@
 
 import 'package:authentication/controller/authentication/auth_controller.dart';
 import 'package:authentication/model/itemmodel.dart';
-import 'package:authentication/theme/colors.dart';
 import 'package:authentication/view/details/call/call.dart';
 import 'package:authentication/view/details/chatpage/chat.dart';
 import 'package:authentication/view/details/payment/payment.dart';
-import 'package:authentication/view/details/widget/details_widget.dart';
 import 'package:authentication/view/details/location/location.dart';
-import 'package:authentication/widgets/circleavatar_widget.dart';
+import 'package:authentication/view/details/widget/details_widget.dart';
 import 'package:authentication/widgets/navigator_widget.dart';
-import 'package:authentication/widgets/text_widget.dart';
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +27,8 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
+  int selectedImageIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -48,19 +47,20 @@ class _DetailsState extends State<Details> {
           onPressed: () {
             NavigatorHelper().pop(context: context);
           },
-          icon: Icon(EneftyIcons.arrow_left_3_outline),
+          icon: Icon(EneftyIcons.arrow_left_3_outline, color: Colors.black),
         ),
-        actions: [
-          widget.thisUser!
-              ? SizedBox.shrink()
-              : IconButton(
-                  onPressed: () {
-                    NavigatorHelper()
-                        .push(context: context, page: CallingPage());
-                  },
-                  icon: Icon(EneftyIcons.call_calling_outline),
-                ),
-        ],
+        // actions: [
+        //   widget.thisUser!
+        //       ? SizedBox.shrink()
+        //       : IconButton(
+        //           onPressed: () {
+        //             NavigatorHelper()
+        //                 .push(context: context, page: CallingPage());
+        //           },
+        //           icon: Icon(EneftyIcons.call_calling_outline,
+        //               color: Colors.black),
+        //         ),
+        // ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -79,20 +79,22 @@ class _DetailsState extends State<Details> {
                         DetailWidget().showLargeImage(
                             widget.product.image![index], context);
                       },
-                      child: Image.network(
-                        widget.product.image![index],
-                        fit: BoxFit.cover,
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) return child;
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.network(
+                          widget.product.image![index],
+                          fit: BoxFit.cover,
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          },
+                        ),
                       ),
                     );
                   },
                   onPageChanged: (index) {
-                    // value.selectedImageIndex = index;
                     setState(() {
                       selectedImageIndex = index;
                     });
@@ -110,7 +112,7 @@ class _DetailsState extends State<Details> {
               SizedBox(height: 10),
               Text(
                 widget.product.productname!.toUpperCase(),
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 5),
@@ -118,10 +120,11 @@ class _DetailsState extends State<Details> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.product.price.toString(),
+                    "\₹ ${widget.product.price.toString()}",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
+                      color: Colors.red,
                     ),
                   ),
                   widget.thisUser!
@@ -138,7 +141,7 @@ class _DetailsState extends State<Details> {
                           child: Text("Location"),
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,
-                            backgroundColor: Colors.red,
+                            backgroundColor: Colors.blueAccent,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -158,70 +161,73 @@ class _DetailsState extends State<Details> {
                   child: Consumer<AuthenticationProvider>(
                     builder: (context, value, child) => Row(
                       children: [
-                        circleavatar().circleAvatar(
-                          image: NetworkImage(
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(
                               value.sortedUser?.image.toString() ?? ""),
-                          bgcolor: Colors.black,
-                          context: context,
                           radius: 25.0,
+                          backgroundColor: Colors.black,
                         ),
                         SizedBox(width: 10),
                         Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(height: 8),
-                                  TextWidget().text(
-                                    data: value.sortedUser!.firstname,
-                                    size: 17.0,
-                                  ),
-                                  SizedBox(
-                                    width: size.width * .5,
-                                    child: TextWidget().text(
-                                      data: value.sortedUser!.email,
-                                      size: 14.0,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      DetailWidget().launchPhone(
-                                          "${value.sortedUser?.phoneNumber}");
-                                    },
-                                    child: TextWidget().text(
-                                      data: value.sortedUser?.phoneNumber,
-                                      size: 14.0,
-                                      color: Colors.grey,
-                                    ),
-                                  )
-                                ],
+                              Text(
+                                value.sortedUser!.firstname.toString(),
+                                style: TextStyle(
+                                  fontSize: 17.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                              widget.thisUser!
-                                  ? SizedBox.shrink()
-                                  : IconButton(
-                                      onPressed: () => NavigatorHelper().push(
-                                        context: context,
-                                        page:
-                                            ChatPage(userinfo: pro.sortedUser!),
-                                      ),
-                                      icon: Icon(EneftyIcons.message_outline),
-                                    ),
-                              SizedBox(height: 20),
+                              SizedBox(height: 5),
+                              Text(
+                                value.sortedUser!.email.toString(),
+                                style: TextStyle(
+                                  fontSize: 14.0,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  DetailWidget().launchPhone(
+                                      "${value.sortedUser?.phoneNumber}");
+                                },
+                                child: Text(
+                                  value.sortedUser?.phoneNumber ?? '',
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
+                        widget.thisUser!
+                            ? SizedBox.shrink()
+                            : IconButton(
+                                onPressed: () => NavigatorHelper().push(
+                                  context: context,
+                                  page: ChatPage(userinfo: pro.sortedUser!),
+                                ),
+                                icon: Icon(EneftyIcons.message_outline,
+                                    color: Colors.black),
+                              ),
                       ],
                     ),
                   ),
                 ),
               ),
               SizedBox(height: 10),
-              Text(widget.product.category.toString()),
+              Text(
+                "Category: ${widget.product.category}",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              ),
               SizedBox(height: 10),
-              Text(widget.product.description.toString()),
+              Text(
+                widget.product.description.toString(),
+                style: TextStyle(fontSize: 16),
+              ),
               SizedBox(height: 20),
               widget.thisUser!
                   ? SizedBox.shrink()
@@ -237,7 +243,7 @@ class _DetailsState extends State<Details> {
                       child: Text("Proceed to Payment"),
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
-                        backgroundColor: colors().blue,
+                        backgroundColor: Colors.green,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
