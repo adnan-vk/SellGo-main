@@ -2,6 +2,7 @@
 
 // class DetailsProvider extends ChangeNotifier {
 //   int selectedImageIndex = 0;
+//   int currentImageIndex = 0;
 
 //   selectIndex(index) {
 //     selectedImageIndex = index;

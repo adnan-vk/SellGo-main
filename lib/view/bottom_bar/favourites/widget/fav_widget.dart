@@ -32,8 +32,9 @@ class favWidget {
                     }
                     NavigatorHelper().push(
                       context: context,
-                      page: Details(
-                          product: favlistItems[index], thisUser: thisuser!),
+                      page: Details(product: favlistItems[index], thisUser: thisuser)
+                      // Details(
+                      //     product: favlistItems[index], thisUser: thisuser!),
                     );
                   },
                   child: Card(

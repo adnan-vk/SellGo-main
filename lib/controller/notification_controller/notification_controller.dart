@@ -27,7 +27,7 @@ class NotificationController extends ChangeNotifier {
   deleteNotification(context, String id) async {
     await fireStoreService.deleteNotification(id);
     filterAndGroupNotifications(context);
-    // notifyListeners();
+    notifyListeners();
   }
 
   getNotifications(BuildContext context) async {

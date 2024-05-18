@@ -5,7 +5,6 @@ import 'widgets/home_widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key});
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -45,7 +44,7 @@ class HomeScreen extends StatelessWidget {
               context,
             ),
             SizedBox(height: size.height * .015),
-            HomeWidgets().productList(context)
+            HomeWidgets().productList(context),
           ],
         ),
       ),

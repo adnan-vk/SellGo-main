@@ -10,6 +10,7 @@ import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -57,62 +58,62 @@ class _NotificationScreenState extends State<NotificationScreen> {
               String formattedTime = DateFormat('hh:mm a').format(timestamp);
               return Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
-                child: Card(
-                  color: Color.fromARGB(255, 231, 241, 255),
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                    side: BorderSide(
-                        color: Color.fromARGB(100, 180, 189, 196), width: 1.0),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                child: Slidable(
+                  key: ValueKey(senderId),
+                  endActionPane: ActionPane(
+                    motion: const ScrollMotion(),
                     children: [
-                      ListTile(
-                        hoverColor: Colors.transparent,
-                        onTap: () {
-                          // checkAndNavigate(context, notifications);
+                      SlidableAction(
+                        onPressed: (context) {
+                          value.deleteNotification(context, senderId);
                         },
-                        leading: CircleAvatar(
-                          radius: MediaQueryWidget().width(context, .05),
-                          backgroundColor:
-                              const Color.fromARGB(255, 255, 255, 255),
-                          child: Icon(EneftyIcons.notification_outline),
-                          // IconWidget(context,
-                          //     iconData: IconlyLight.notification),
-                        ),
-                        title: TextWidget()
-                            .text(data: notifications[0].title.toString()),
-                        // CustomText(
-                        //   text: notifications[0].title.toString(),
-                        //   size: 13,
-                        //   textAlign: TextAlign.start,
-                        //   overflow: true,
-                        // ),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // TextWidget().costumParagraphText(context,
-                            //     text:
-                            //         'You have received ${notifications.length} new message${notifications.length > 1 ? 's' : ''}',
-                            //     trimLength: 40,
-                            //     bold: false,
-                            //     textAlign: TextAlign.start),
-                          ],
-                        ),
+                        backgroundColor: Color(0xFFFE4A49),
+                        foregroundColor: Colors.white,
+                        icon: Icons.delete,
+                        label: 'Delete',
                       ),
-                      Padding(
-                          padding: EdgeInsets.only(
-                              right: MediaQueryWidget().width(context, .03),
-                              bottom: MediaQueryWidget().width(context, .02)),
-                          child: TextWidget().text(data: formattedTime)
-                          // CustomText(
-                          //     text: formattedTime,
-                          //     size: 13,
-                          //     bold: false,
-                          //     textAlign: TextAlign.start),
-                          )
                     ],
+                  ),
+                  child: Card(
+                    color: Color.fromARGB(255, 231, 241, 255),
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      side: BorderSide(
+                          color: Color.fromARGB(100, 180, 189, 196),
+                          width: 1.0),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        ListTile(
+                          hoverColor: Colors.transparent,
+                          onTap: () {
+                            checkAndNavigate(context, notifications);
+                          },
+                          leading: CircleAvatar(
+                            radius: MediaQueryWidget().width(context, .05),
+                            backgroundColor:
+                                const Color.fromARGB(255, 255, 255, 255),
+                            child: Icon(EneftyIcons.notification_outline),
+                          ),
+                          title: TextWidget().text(
+                            data: notifications[0].title.toString(),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            right: MediaQueryWidget().width(context, .03),
+                            bottom: MediaQueryWidget().width(context, .02),
+                          ),
+                          child: TextWidget().text(data: formattedTime),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
@@ -123,7 +124,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     );
   }
 
-  checkAndNavigate(context, List<NotificationModel> notifications) async {
+  void checkAndNavigate(context, List<NotificationModel> notifications) async {
     final getUserPrd =
         Provider.of<AuthenticationProvider>(context, listen: false);
     final getNotificationPrd =
@@ -131,8 +132,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
     if (notifications.isNotEmpty &&
         notifications[0].type == NotificationType.chat) {
       UserModel user = await getUserPrd.getUser();
-      NavigatorHelper().push(context: context, page: ChatPage(userinfo: user));
-      // NavigatorHelp().push(context, ChatPage(userinfo: user));
+      NavigatorHelper().push(
+        context: context,
+        page: ChatPage(userinfo: user),
+      );
     }
     for (var id in notifications) {
       await getNotificationPrd.deleteNotification(context, id.id!);

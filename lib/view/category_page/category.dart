@@ -108,11 +108,21 @@ class Category extends StatelessWidget {
                                             builder:
                                                 (context, provalue, child) =>
                                                     GestureDetector(
-                                              onTap: () {},
-                                              child: Icon(
-                                                EneftyIcons.heart_bold,
-                                                color: Colors.red,
-                                              ),
+                                              onTap: () async {
+                                                final wish =
+                                                    value.favListCheck(product);
+                                                await value.favouritesClicked(
+                                                    product.id!, wish);
+                                              },
+                                              child: value.favListCheck(product)
+                                                  ? Icon(
+                                                      EneftyIcons.heart_outline,
+                                                      color: Colors.red,
+                                                    )
+                                                  : Icon(
+                                                      EneftyIcons.heart_bold,
+                                                      color: Colors.red,
+                                                    ),
                                             ),
                                           ),
                                         ],

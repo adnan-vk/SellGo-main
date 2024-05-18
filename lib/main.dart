@@ -1,3 +1,4 @@
+import 'package:authentication/controller/details_provider/details_provider.dart';
 import 'package:authentication/controller/item_provider/item_provider.dart';
 import 'package:authentication/controller/authentication/auth_controller.dart';
 import 'package:authentication/controller/bottom_provider/bottom_prov.dart';
