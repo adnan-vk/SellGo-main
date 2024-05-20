@@ -16,6 +16,11 @@ class favWidget {
     return Consumer2<FavouritesProvider, ItemProvider>(
         builder: (context, favvalue, addvalue, child) {
       final favlistItems = checkUser(favvalue, addvalue);
+      if (favlistItems.isEmpty) {
+        return Center(
+          child: TextWidget().text(data: "There is no items in the Favourites"),
+        );
+      }
       return ListView.builder(
         itemCount: favlistItems.length,
         itemBuilder: (context, index) {
@@ -31,11 +36,12 @@ class favWidget {
                       thisuser = false;
                     }
                     NavigatorHelper().push(
-                      context: context,
-                      page: Details(product: favlistItems[index], thisUser: thisuser)
-                      // Details(
-                      //     product: favlistItems[index], thisUser: thisuser!),
-                    );
+                        context: context,
+                        page: Details(
+                            product: favlistItems[index], thisUser: thisuser)
+                        // Details(
+                        //     product: favlistItems[index], thisUser: thisuser!),
+                        );
                   },
                   child: Card(
                     elevation: 0,

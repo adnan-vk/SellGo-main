@@ -21,7 +21,9 @@ class HomeWidgets {
   topwidget(context) {
     final size = MediaQuery.of(context).size;
     if (firebseauth != null && firebseauth!.photoURL != null) {
-      imageprovider = NetworkImage(firebseauth!.photoURL.toString());
+      imageprovider = NetworkImage(
+        firebseauth!.photoURL.toString(),
+      );
     } else {
       imageprovider = AssetImage("assets/images/default image.jpg");
     }
