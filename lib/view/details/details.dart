@@ -235,23 +235,22 @@ class _DetailsState extends State<Details> {
                             children: [
                               TextWidget().text(
                                   data:
-                                      "${pro.sortedUser?.firstname.toString() ?? ""}",
+                                      "${pro.sortedUser?.firstname.toString()}",
                                   weight: FontWeight.bold,
                                   size: 16.0),
                               SizedBox(height: 5),
                               TextWidget().text(
-                                data:
-                                    "${pro.sortedUser?.email.toString() ?? ""}",
+                                data: "${pro.sortedUser?.email.toString()}",
                                 size: 14.0,
                                 color: Colors.grey,
                               ),
                               GestureDetector(
                                 onTap: () {
                                   DetailWidget().launchPhone(
-                                      "${pro.sortedUser?.phoneNumber} ??" " ");
+                                      "${pro.sortedUser?.phoneNumber}");
                                 },
                                 child: TextWidget().text(
-                                  data: pro.sortedUser?.phoneNumber ?? '',
+                                  data: pro.sortedUser?.phoneNumber,
                                   size: 14.0,
                                   color: Colors.blue,
                                 ),
