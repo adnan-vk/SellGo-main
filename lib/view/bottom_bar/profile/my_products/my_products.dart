@@ -3,6 +3,7 @@ import 'package:authentication/model/itemmodel.dart';
 import 'package:authentication/theme/colors.dart';
 import 'package:authentication/view/bottom_bar/add_item/additem.dart';
 import 'package:authentication/view/bottom_bar/profile/my_products/widget/Product_widget.dart';
+import 'package:authentication/widgets/botton_widget.dart';
 import 'package:authentication/widgets/navigator_widget.dart';
 import 'package:authentication/widgets/text_widget.dart';
 import 'package:enefty_icons/enefty_icons.dart';
@@ -28,11 +29,7 @@ class _MyProductsState extends State<MyProducts> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        leading: IconButton(
-            onPressed: () {
-              NavigatorHelper().pop(context: context);
-            },
-            icon: Icon(EneftyIcons.arrow_left_3_outline)),
+        leading: ButtonWidget().leadingIcon(context),
         centerTitle: true,
         title: TextWidget().text(data: "MyProducts"),
       ),

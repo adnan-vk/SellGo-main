@@ -42,17 +42,20 @@ class AuthService {
     }
   }
 
-  getCurrentUser() async {
+  Future<UserModel?> getCurrentUser() async {
     final snapshot = await firestore
         .collection(collection)
-        .doc(firebaseAuth.currentUser!.uid)
+        .doc(firebaseAuth.currentUser?.uid)
         .get();
-    return UserModel.fromJson(snapshot.data()!);
+
+    if (snapshot.exists && snapshot.data() != null) {
+      return UserModel.fromJson(
+        snapshot.data()!,
+      );
+    } else {
+      return null;
+    }
   }
-  // Future<List<UserModel>> getAllUsers() async {
-  //   final snapshot = await user.get();
-  //   return snapshot.docs.map((doc) => doc.data()).toList();
-  // }
 
   Future<UserCredential> signUpEmail(String email, String password) async {
     try {
@@ -106,7 +109,9 @@ class AuthService {
           await FirebaseAuth.instance.signInWithCredential(credential);
 
       final User? guser = userCredential.user;
-      log("user display Name : ${guser?.displayName}");
+      log(
+        "user display Name : ${guser?.displayName}",
+      );
       return guser;
     } catch (e) {
       print('Google Sign-In Error: $e');
@@ -167,7 +172,9 @@ class AuthService {
 
   updateUser(userid, UserModel data) async {
     try {
-      await user.doc(userid).update(data.toJson());
+      await user.doc(userid).update(
+            data.toJson(),
+          );
     } catch (e) {
       log("error in updating product : $e");
     }
@@ -178,8 +185,13 @@ class AuthService {
       QuerySnapshot<Map<String, dynamic>> snapshot =
           await firestore.collection(collection).get();
 
-      List<UserModel> data =
-          snapshot.docs.map((e) => UserModel.fromJson(e.data())).toList();
+      List<UserModel> data = snapshot.docs
+          .map(
+            (e) => UserModel.fromJson(
+              e.data(),
+            ),
+          )
+          .toList();
       return data;
     } catch (e) {
       log('get error: $e');

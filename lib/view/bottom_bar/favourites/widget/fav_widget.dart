@@ -39,8 +39,6 @@ class favWidget {
                         context: context,
                         page: Details(
                             product: favlistItems[index], thisUser: thisuser)
-                        // Details(
-                        //     product: favlistItems[index], thisUser: thisuser!),
                         );
                   },
                   child: Card(
@@ -50,8 +48,8 @@ class favWidget {
                     ),
                     child: ListTile(
                       leading: Container(
-                        width: size.width * .2,
-                        height: size.height * .1,
+                        width: 75,
+                        height: 75,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           image: DecorationImage(

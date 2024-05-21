@@ -28,8 +28,8 @@ class ProductWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: size.width * 0.3,
-                width: size.width * 0.3,
+                height: 100,
+                width: 100,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   image: DecorationImage(
@@ -57,7 +57,7 @@ class ProductWidget {
                         ),
                         IconButton(
                           icon: Icon(
-                            EneftyIcons.bag_bold,
+                            EneftyIcons.trash_bold,
                             color: Colors.red,
                           ),
                           onPressed: () {

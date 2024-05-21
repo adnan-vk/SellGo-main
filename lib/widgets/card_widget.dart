@@ -16,17 +16,17 @@ class CardWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
-              width: size.width * .07,
+              width: 25,
               child: Image.network(
                 url,
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(width: size.width * .12),
+            SizedBox(width: 15),
             Expanded(
               child: TextWidget().text(
                 data: text,
-                size: size.width * .045,
+                size: 15.0,
               ),
             ),
           ],

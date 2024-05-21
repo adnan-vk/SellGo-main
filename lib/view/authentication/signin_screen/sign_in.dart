@@ -29,10 +29,8 @@ class SignIn extends StatelessWidget {
                 const SizedBox(
                   height: 100,
                 ),
-                TextWidget().text(
-                    data: "Sign in",
-                    size: size.width * .1,
-                    weight: FontWeight.bold),
+                TextWidget()
+                    .text(data: "Sign in", size: 40.0, weight: FontWeight.bold),
                 const SizedBox(
                   height: 20,
                 ),
@@ -44,7 +42,7 @@ class SignIn extends StatelessWidget {
                   child: Container(
                     width: double.infinity,
                     child: FloatingActionButton.extended(
-                      backgroundColor: colors().blue, 
+                      backgroundColor: colors().blue,
                       elevation: 3,
                       onPressed: () async {
                         if (formkey.currentState!.validate()) {
@@ -83,7 +81,7 @@ class SignIn extends StatelessWidget {
                     TextWidget().text(
                         data: "Dont have an Account? ",
                         color: Colors.grey,
-                        size: size.width * .025),
+                        size: 8.0),
                     ButtonWidget().textbutton(
                         weight: FontWeight.bold,
                         text: "Create Account",

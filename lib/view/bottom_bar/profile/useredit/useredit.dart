@@ -1,10 +1,9 @@
 import 'package:authentication/controller/authentication/auth_controller.dart';
 import 'package:authentication/controller/item_provider/item_provider.dart';
-import 'package:authentication/widgets/navigator_widget.dart';
+import 'package:authentication/widgets/botton_widget.dart';
 import 'package:authentication/widgets/snack_bar_widgets.dart';
 import 'package:authentication/widgets/text_widget.dart';
 import 'package:authentication/widgets/textfield_widget.dart';
-import 'package:enefty_icons/enefty_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:authentication/model/authmodel.dart';
@@ -39,11 +38,7 @@ class _UserEditState extends State<UserEdit> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        leading: IconButton(
-            onPressed: () {
-              NavigatorHelper().pop(context: context);
-            },
-            icon: Icon(EneftyIcons.arrow_left_3_outline)),
+        leading: ButtonWidget().leadingIcon(context),
       ),
       body: Form(
         key: formkey,

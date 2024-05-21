@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use, use_key_in_widget_constructors
 
 import 'package:authentication/theme/colors.dart';
+import 'package:authentication/widgets/botton_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -12,6 +13,8 @@ class HelpSupport extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Help Center'),
+        automaticallyImplyLeading: false,
+        leading: ButtonWidget().leadingIcon(context),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),

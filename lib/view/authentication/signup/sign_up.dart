@@ -38,7 +38,7 @@ class SignUp extends StatelessWidget {
                 ),
                 TextWidget().text(
                     data: "Create an Account",
-                    size: size.width * .08,
+                    size: 25.0,
                     weight: FontWeight.bold),
                 const SizedBox(
                   height: 20,
@@ -83,7 +83,7 @@ class SignUp extends StatelessWidget {
                     TextWidget().text(
                         data: "Already have an Account? ",
                         color: Colors.grey,
-                        size: size.width * .025),
+                        size: 8.0),
                     ButtonWidget().textbutton(
                       text: "Login",
                       weight: FontWeight.bold,

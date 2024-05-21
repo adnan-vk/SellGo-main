@@ -13,7 +13,7 @@ class BottomBar extends StatelessWidget {
   final List tabs = [
     HomeScreen(),
     Favourites(),
-    ChatList(),
+    ChatList(), 
     Profile(),
   ];
   @override

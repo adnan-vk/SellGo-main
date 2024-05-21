@@ -3,6 +3,7 @@ import 'package:authentication/controller/notification_controller/notification_c
 import 'package:authentication/model/authmodel.dart';
 import 'package:authentication/model/notification_model.dart';
 import 'package:authentication/view/details/chatpage/chat.dart';
+import 'package:authentication/widgets/botton_widget.dart';
 import 'package:authentication/widgets/mediaquery_widget.dart';
 import 'package:authentication/widgets/navigator_widget.dart';
 import 'package:authentication/widgets/text_widget.dart';
@@ -38,12 +39,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-            NavigatorHelper().pop(context: context);
-          },
-          icon: Icon(EneftyIcons.arrow_left_3_outline),
-        ),
+        leading: ButtonWidget().leadingIcon(context),
       ),
       body: Consumer<NotificationController>(
         builder: (context, value, child) {

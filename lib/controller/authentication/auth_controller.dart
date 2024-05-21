@@ -57,7 +57,7 @@ class AuthenticationProvider extends ChangeNotifier {
 
   getUser() async {
     currentUser = await authService.getCurrentUser();
-    log(currentUser!.phoneNumber!);
+    log(currentUser?.phoneNumber ?? "");
     notifyListeners();
   }
 

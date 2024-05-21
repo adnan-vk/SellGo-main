@@ -1,5 +1,6 @@
 import 'package:authentication/controller/item_provider/item_provider.dart';
 import 'package:authentication/view/details/details.dart';
+import 'package:authentication/widgets/botton_widget.dart';
 import 'package:authentication/widgets/navigator_widget.dart';
 import 'package:authentication/widgets/text_widget.dart';
 import 'package:enefty_icons/enefty_icons.dart';
@@ -19,11 +20,7 @@ class Category extends StatelessWidget {
       appBar: AppBar(
         title: TextWidget().text(data: category),
         automaticallyImplyLeading: false,
-        leading: IconButton(
-            onPressed: () {
-              NavigatorHelper().pop(context: context);
-            },
-            icon: Icon(EneftyIcons.arrow_left_3_outline)),
+        leading: ButtonWidget().leadingIcon(context),
         centerTitle: true,
       ),
       body: Container(
@@ -97,7 +94,7 @@ class Category extends StatelessWidget {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           SizedBox(
-                                            width: size.width * .26,
+                                            width: 90,
                                             child: TextWidget().text(
                                               data: "₹ ${product.price}",
                                               size: 20.0,

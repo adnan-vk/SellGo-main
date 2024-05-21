@@ -7,6 +7,7 @@ import 'package:authentication/theme/colors.dart';
 import 'package:authentication/view/details/chatpage/chat.dart';
 import 'package:authentication/view/details/payment/payment.dart';
 import 'package:authentication/view/details/widget/details_widget.dart';
+import 'package:authentication/widgets/botton_widget.dart';
 import 'package:authentication/widgets/navigator_widget.dart';
 import 'package:authentication/widgets/text_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -43,15 +44,7 @@ class _DetailsState extends State<Details> {
         iconTheme: IconThemeData(color: Colors.white),
         title: TextWidget().text(data: "Product Details"),
         automaticallyImplyLeading: false,
-        leading: IconButton(
-          onPressed: () {
-            NavigatorHelper().pop(context: context);
-          },
-          icon: Icon(
-            EneftyIcons.arrow_left_3_outline,
-            color: Colors.black,
-          ),
-        ),
+        leading: ButtonWidget().leadingIcon(context),
         actions: [
           if (!widget.thisUser!)
             IconButton(

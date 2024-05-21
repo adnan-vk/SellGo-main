@@ -77,7 +77,7 @@ class Profile extends StatelessWidget {
                             child: TextWidget().text(
                                 data:
                                     "${value.currentUser?.firstname!.toUpperCase()} ${value.currentUser?.lastname!.toUpperCase()}",
-                                size: size.width * .06,
+                                size: 25.0,
                                 weight: FontWeight.bold),
                           ),
                           TextButton(
@@ -98,13 +98,13 @@ class Profile extends StatelessWidget {
                       SizedBox(height: size.height * .015),
                       TextWidget().text(
                         data: "Email : ${value.currentUser?.email.toString()}",
-                        size: size.width * .04,
+                        size: 15.0,
                       ),
                       SizedBox(height: size.height * .015),
                       TextWidget().text(
                         data:
                             "Phone : ${value.currentUser?.phoneNumber ?? " "}",
-                        size: size.width * .042,
+                        size: 15.0,
                       ),
                     ],
                   ),

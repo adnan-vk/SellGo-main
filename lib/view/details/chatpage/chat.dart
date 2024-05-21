@@ -4,6 +4,7 @@ import 'package:authentication/controller/chat_provider/chat_provider.dart';
 import 'package:authentication/controller/notification_controller/notification_controller.dart';
 import 'package:authentication/model/authmodel.dart';
 import 'package:authentication/service/chat_service/chat_service.dart';
+import 'package:authentication/widgets/botton_widget.dart';
 import 'package:authentication/widgets/mediaquery_widget.dart';
 import 'package:authentication/widgets/navigator_widget.dart';
 import 'package:enefty_icons/enefty_icons.dart';
@@ -44,11 +45,7 @@ class _ChatPageState extends State<ChatPage> {
         title: TextWidget()
             .text(data: widget.userinfo.firstname, size: size.width * .05),
         automaticallyImplyLeading: false,
-        leading: IconButton(
-            onPressed: () {
-              NavigatorHelper().pop(context: context);
-            },
-            icon: Icon(EneftyIcons.arrow_left_3_outline)),
+        leading: ButtonWidget().leadingIcon(context),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10),
