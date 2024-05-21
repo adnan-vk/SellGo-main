@@ -6,7 +6,6 @@ import 'package:authentication/model/authmodel.dart';
 import 'package:authentication/service/chat_service/chat_service.dart';
 import 'package:authentication/widgets/botton_widget.dart';
 import 'package:authentication/widgets/mediaquery_widget.dart';
-import 'package:authentication/widgets/navigator_widget.dart';
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,6 @@
 import 'package:authentication/controller/item_provider/item_provider.dart';
 import 'package:authentication/view/details/details.dart';
 import 'package:authentication/widgets/botton_widget.dart';
-import 'package:authentication/widgets/navigator_widget.dart';
 import 'package:authentication/widgets/text_widget.dart';
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';

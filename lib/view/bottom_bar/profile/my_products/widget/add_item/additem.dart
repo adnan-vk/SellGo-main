@@ -1,7 +1,7 @@
 import 'package:authentication/controller/item_provider/item_provider.dart';
 import 'package:authentication/model/itemmodel.dart';
 import 'package:authentication/theme/colors.dart';
-import 'package:authentication/view/bottom_bar/add_item/widget/add_widget.dart';
+import 'package:authentication/view/bottom_bar/profile/my_products/widget/add_item/widget/add_widget.dart';
 import 'package:authentication/widgets/navigator_widget.dart';
 import 'package:authentication/widgets/snack_bar_widgets.dart';
 import 'package:authentication/widgets/text_widget.dart';
@@ -16,9 +16,7 @@ class AddItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final pro = Provider.of<ItemProvider>(context);
-    // final notipro = Provider.of<NotificationController>(context, listen: false);
     return pro.isLoading
         ? Scaffold(
             body: Center(
@@ -48,7 +46,7 @@ class AddItem extends StatelessWidget {
                   children: [
                     TextWidget().text(
                         data: "Add Product Images",
-                        size: size.width * .0423,
+                        size: 18.0,
                         weight: FontWeight.bold),
                     SizedBox(height: 16),
                     Container(
@@ -124,7 +122,7 @@ class AddItem extends StatelessWidget {
                               await pro.uploadImages();
                               await addData(context);
                               // await notipro.sendNotification(
-                              //   receiverId: 
+                              //   receiverId:
                               // );
                               await pro.startLoading(false);
                               snackBarWidget().topsnackBar(context,

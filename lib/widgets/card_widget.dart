@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 class CardWidget {
   card({url, text, VoidCallback? ontap, required context}) {
-    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: ontap,
       child: Container(

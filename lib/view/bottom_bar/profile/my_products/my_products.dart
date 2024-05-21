@@ -1,7 +1,7 @@
 import 'package:authentication/controller/item_provider/item_provider.dart';
 import 'package:authentication/model/itemmodel.dart';
 import 'package:authentication/theme/colors.dart';
-import 'package:authentication/view/bottom_bar/add_item/additem.dart';
+import 'package:authentication/view/bottom_bar/profile/my_products/widget/add_item/additem.dart';
 import 'package:authentication/view/bottom_bar/profile/my_products/widget/Product_widget.dart';
 import 'package:authentication/widgets/botton_widget.dart';
 import 'package:authentication/widgets/navigator_widget.dart';

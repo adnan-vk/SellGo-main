@@ -1,5 +1,4 @@
 import 'package:authentication/controller/authentication/auth_controller.dart';
-import 'package:authentication/theme/colors.dart';
 import 'package:authentication/widgets/navigator_widget.dart';
 import 'package:authentication/widgets/text_widget.dart';
 import 'package:enefty_icons/enefty_icons.dart';
@@ -9,7 +8,6 @@ import 'package:provider/provider.dart';
 class ButtonWidget {
   elevatedbutton(
       {text, color, required context, page, textcolor, icon, iconcolor}) {
-    final size = MediaQuery.of(context).size;
     return ElevatedButton(
       onPressed: () => NavigatorHelper()
           .pushReplacement(context: context, replacementPage: page),

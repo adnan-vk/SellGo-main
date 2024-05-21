@@ -11,7 +11,6 @@ import 'package:provider/provider.dart';
 
 class favWidget {
   Widget buildFavouriteItem(context) {
-    final size = MediaQuery.of(context).size;
     bool? thisuser;
     return Consumer2<FavouritesProvider, ItemProvider>(
         builder: (context, favvalue, addvalue, child) {
