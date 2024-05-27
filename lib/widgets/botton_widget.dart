@@ -12,11 +12,11 @@ class ButtonWidget {
       onPressed: () => NavigatorHelper()
           .pushReplacement(context: context, replacementPage: page),
       style: ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll(color),
-        padding: const MaterialStatePropertyAll(
+        backgroundColor: WidgetStatePropertyAll(color),
+        padding: const WidgetStatePropertyAll(
           EdgeInsets.only(top: 10, bottom: 10),
         ),
-        shape: MaterialStatePropertyAll(
+        shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(40),
           ),

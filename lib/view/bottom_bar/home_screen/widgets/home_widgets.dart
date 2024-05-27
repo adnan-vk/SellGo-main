@@ -233,7 +233,7 @@ class HomeWidgets {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 SizedBox(
-                                  width: 120,
+                                  width: 110,
                                   child: TextWidget().text(
                                     data: "₹ ${product.price}",
                                     size: 20.0,

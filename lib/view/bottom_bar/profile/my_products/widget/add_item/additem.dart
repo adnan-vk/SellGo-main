@@ -93,44 +93,25 @@ class AddItem extends StatelessWidget {
                     ),
                     SizedBox(height: 24),
                     AddWidget().textfields(context),
-                    SizedBox(height: 10),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextWidget().text(
-                              data: "Allow Your Location",
-                              color: colors().blue),
-                          Icon(
-                            EneftyIcons.location_bold,
-                            size: 15,
-                            color: Colors.red,
-                          )
-                        ],
-                      ),
-                    ),
                     SizedBox(height: 24),
                     Center(
                       child: Container(
                         width: double.infinity,
                         child: FloatingActionButton.extended(
-                            elevation: 0,
-                            backgroundColor: colors().blue,
-                            onPressed: () async {
-                              await pro.startLoading(true);
-                              await pro.uploadImages();
-                              await addData(context);
-                              // await notipro.sendNotification(
-                              //   receiverId:
-                              // );
-                              await pro.startLoading(false);
-                              snackBarWidget().topsnackBar(context,
-                                  message:
-                                      "Good job, your Item is Added Successfully");
-                            },
-                            label: TextWidget()
-                                .text(data: "Add Item", color: Colors.white)),
+                          elevation: 0,
+                          backgroundColor: colors().blue,
+                          onPressed: () async {
+                            await pro.startLoading(true);
+                            await pro.uploadImages();
+                            await addData(context);
+                            await pro.startLoading(false);
+                            snackBarWidget().topsnackBar(context,
+                                message:
+                                    "Good job, your Item is Added Successfully");
+                          },
+                          label: TextWidget()
+                              .text(data: "Add Item", color: Colors.white),
+                        ),
                       ),
                     ),
                   ],

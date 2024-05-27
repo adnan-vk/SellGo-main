@@ -47,8 +47,8 @@ class CallingPage extends StatelessWidget {
                     icon: Icon(Icons.call_end),
                     color: Colors.white,
                     style: ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Colors.red),
-                    ),
+                      backgroundColor: WidgetStatePropertyAll(Colors.red),
+                    ), 
                   ),
                 ),
                 SizedBox(width: 20),

@@ -31,7 +31,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         'email': 'test@gmail.com',
       },
       'external': {
-        'wallets': ['paytm'],
+        'wallets': ['paytm,googlepay'],
       },
     };
 
