@@ -119,7 +119,7 @@ class ItemService {
       log("the product is not deletd $e");
     }
   }
- 
+
   updateproduct(productid, ProductModel data) async {
     try {
       await product.doc(productid).update(data.tojson());
